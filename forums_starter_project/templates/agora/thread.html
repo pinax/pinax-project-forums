@@ -1,0 +1,117 @@
+{% extends "agora/base.html" %}
+
+{% load humanize %}
+{% load avatar_tags %}
+
+{% block body %}
+    <div>
+        <small class="breadcrumbs">
+            <a href="{% url agora_forums %}">Forums</a>
+            {% if thread.forum.category %}
+                {% if thread.forum.category.parent %}
+                    <str> &raquo; </str>
+                    <a href="{% url agora_category thread.forum.category.parent.id %}">{{ thread.forum.category.parent.title }}</a>
+                {% endif %}
+                <str> &raquo; </str> 
+                <a href="{% url agora_category thread.forum.category.id %}">{{ thread.forum.category.title }}</a>
+            {% else %}
+                {% if thread.forum.parent %}
+                    {% if thread.forum.parent.category %}
+                        {% if thread.forum.parent.category.parent %}
+                            <str> &raquo; </str>
+                            <a href="{% url agora_category thread.forum.parent.category.parent.id %}">{{ thread.forum.parent.category.parent.title }}</a>
+                        {% endif %}
+                        <str> &raquo; </str> 
+                        <a href="{% url agora_category thread.forum.parent.category.id %}">{{ thread.forum.parent.category.title }}</a>
+                    {% else %}
+                        {% if thread.forum.parent.parent %}
+                            <str> &raquo; </str>
+                            <a href="{% url agora_forum thread.forum.parent.parent.id %}">{{ thread.forum.parent.parent.title }}</a>
+                        {% endif %}
+                    {% endif %}
+                    <str> &raquo; </str> 
+                    <a href="{% url agora_forum thread.forum.parent.id %}">{{ thread.forum.parent.title }}</a>
+                {% endif %}
+            {% endif %}
+            <str> &raquo; </str>
+            <a href="{% url agora_forum thread.forum.id %}">{{ thread.forum.title }}</a>
+            <str> &raquo; </str>
+        </small>
+        <h2>{{ thread.title }}</h2>
+        <p>
+            Started {{ thread.creation_date|timesince }} ago
+            <str> &bull; </str>
+            {{ thread.view_count }} View{{ thread.view_count|pluralize }}
+            <str> &bull; </str>
+            {{ thread.reply_count|add:"-1" }} Repl{{ thread.reply_count|add:"-1"|pluralize:"y,ies" }}
+        </p>
+        <div>
+            {{ thread.content|urlize|linebreaks }}
+        </div>
+        {% if user.is_authenticated %}
+            <a href="{% url agora_reply thread.id %}">Post a Reply</a>
+        {% endif %}
+        <a href="?order_type={% ifequal order_type "asc" %}desc{% else %}asc{% endifequal %}">Reverse Reply Order</a>
+    </div>
+    
+    <div>@@@ pagination</div>
+    
+    {% for post in posts %}
+        <div id="post-{{ post.id }}" class="post">
+            <div class="post-top">
+                <div class="post-bottom">
+                    <div class="side">
+                        <a class="thumb" href="{# url user_page post.author.id #}">{% avatar post.author 69 %}</a>
+                        <h3><a href="{# url user_page post.author.id #}">{{ post.author.username }}</a></h3>
+                        @@@ points, stars, level
+                        <dl><dt>Posts</dt>
+                            <dd>{{ post.author.post_count.all.0.count|intcomma }}</dd>
+                        </dl>
+                    </div>
+                    <div class="post_content">
+                        {{ post.content|urlize|linebreaks }}
+                        <div class="signature">
+                            <p>{{ member.forum_signature }}</p>
+                        </div>
+                        <div class="controls">
+                            {% if user.is_authenticated %}
+                                @@@ rating?
+                            {% endif %}
+                            <span class="timesince">{{ post.created|timesince }} ago</span>
+                            {% if user.is_authenticated %}
+                            <div class="buttons">
+                                @@@ bookmark
+                                <a href="{# url forum_report post.id #}">Report</a>
+                                <a href="{% url agora_reply thread.id %}?quote={{ post.id }}">Quote</a>
+                                <a href="{% url agora_reply thread.id %}">Reply</a>
+                                {# if post|post_editable:member %}<a href="{% url agora_reply_edit post.id %}" class="edit open_lightbox">Edit</a>{% endif #}
+                            </div>
+                            {% endif %}
+                        </div><!-- /controls -->
+                    </div><!-- /post -->
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div><!-- /post -->
+    {% endfor %}
+        
+    {% if user.is_authenticated %}
+        <h2>Post</h2>
+        <div class="last comment">
+            <div class="comment_user">
+                <h3>You say:</h3>
+                {# <img height="69" width="69" alt="" src="{% avatar_url member "w=69,h=69" %}" /> #}
+            </div><!-- /user -->
+            
+            <form action="" method="post">
+                {% csrf_token %}
+                <textarea name="content" class="large"></textarea>
+                <br/>
+                <input type="submit" value="reply" />
+            </form>
+            <div class="clear"></div>
+        </div><!-- /comment -->
+    {% endif %}
+    
+    <div>@@@ pagination</div>
+{% endblock %}

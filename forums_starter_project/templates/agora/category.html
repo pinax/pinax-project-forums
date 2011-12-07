@@ -1,0 +1,57 @@
+{% extends "agora/base.html" %}
+
+{% load humanize %}
+
+{% block body %}
+    
+    <div>
+        <small class="breadcrumbs">
+            <a href="{% url agora_forums %}">Forums</a>
+            {% if category.parent %}<str> &raquo; </str>
+                <a href="{% url agora_category category.parent.id %}">{{ category.parent.title }}</a>{% endif %}
+            <str> &raquo; </str> 
+        </small>
+        <h2>{{ category.title }}</h2>
+        <p>
+            {{ category.forums.all.count }} Forum{{ category.forums.all.count|pluralize }}
+            &bull;
+            {{ category.subcategories.all.count }} subcategor{{ category.subcategories.all.count|pluralize:"y,ies"}}
+        </p>
+    </div>
+    
+    {% if category.subcategories.all %}
+        <h2>Subcategories</h2>
+        
+        <ul>
+            {% for subcategory in category.subcategories.all %}
+                <li><a href="{% url agora_category subcategory.id %}">{{ subcategory.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <table>
+        <tr>
+            <th>Forum Name</th>
+            <th>Last Post</th>
+            <th>Threads</th>
+            <th>Posts</th>
+        </tr>
+        {% for forum in forums %}
+            <tr>
+                <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a><br />
+                    <small>{{ forum.description }}</small></td>
+                {% if forum.last_reply %}
+                   <td><a href="{% url agora_thread forum.last_reply.thread.id %}">{{ forum.last_reply.thread.title }}</a><br />
+                   <small>by <a href="{# url user_page forum.last_reply.author.id #}">{{ forum.last_reply.author.username }}</a></small></td>
+                {% else %} 
+                    <td></td>
+                {% endif %}
+                <td>{{ forum.threads.all.count|intcomma }}</td>
+                <td>{{ forum.reply_count|intcomma }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div>
+        @@@ pagination
+    </div>
+{% endblock %}

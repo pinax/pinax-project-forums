@@ -1,0 +1,9 @@
+<h3>Edit Your Reply</h3>
+
+<form action="{% url agora_reply_edit reply.id %}" method="POST">
+    {% csrf_token %} 
+    <textarea name="content" rows="10">{{ reply.content }}</textarea>
+    <br />
+    <input type="submit" value="edit" />
+    
+</form>

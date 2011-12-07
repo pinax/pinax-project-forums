@@ -1,0 +1,15 @@
+{% extends "agora/base.html" %}
+
+{% block body %}
+
+<h3>Post a Reply</h3>
+
+<form action="{% url agora_reply thread_id %}" method="POST">
+    {% csrf_token %} 
+    <textarea name="content" rows="10">{% if quote_content %}{{ quote_content }}{% endif %}</textarea>
+    <br/>
+    <input type="submit" value="reply" />
+    
+</form>
+
+{% endblock %}

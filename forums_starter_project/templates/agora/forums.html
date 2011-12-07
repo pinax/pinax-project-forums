@@ -1,0 +1,102 @@
+{% extends "agora/base.html" %}
+
+{% load avatar_tags %}
+
+
+{% block body %}
+    <h1>Forums</h1>
+    
+    <h2>Categories</h2>
+    
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url agora_category category.id %}">{{ category.title }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Most Active Forums</h2>
+    
+    <table>
+        {% for forum in most_active_forums %}
+            <tr>
+                <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a></td>
+                <td>{{ forum.category }}</td>
+                <td>{{ forum.reply_count }} post{{ forum.reply_count|pluralize }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <h2>Most Viewed Forums</h2>
+    
+    <table>
+        {% for forum in most_viewed_forums %}
+            <tr>
+                <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a></td>
+                <td>{{ forum.category }}</td>
+                <td>{{ forum.view_count }} post{{ forum.view_count|pluralize }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <h2>Most Active Members</h2>
+    
+    <table>
+        {% for member_count in most_active_members %}
+            <tr>
+                <td><a href="{# url user_page member_count.member.id #}" class="thumb">
+                {% avatar member_count.user 49 %}
+                </a></td>
+                <td><a href="{# url user_page member_count.user.id #}">{{ member_count.user.username }}</a></td>
+                <td>{{ member_count.count }} Post{{ member_count.count|pluralize }}</td>
+            </tr>
+    {% endfor %}
+    </table>
+    
+    <h2>Latest Posts</h2>
+    
+    <table>
+        {% for post in latest_posts %}
+            <tr>
+                <td><a href="{% url agora_thread post.thread.id %}#post-{{ post.id }}">{{ post.thread.title }}</a> &bull; {{ post.content|truncatewords:"5" }}</td>
+                <td>{{ post.created|timesince }} ago by <a href="{# url user_page post.author.id #}">{{ post.author.username }}</a></td>
+                <td>{{ post.thread.forum }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <h2>Latest Threads</h2>
+    
+    <table>
+        {% for thread in latest_threads %}
+            <tr>
+                <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a> &bull; {{ thread.last_reply.content|truncatewords:"5" }}</td>
+                <td>{{ thread.last_modified|timesince }} ago by <a href="{# url user_page thread.author.id #}">{{ thread.last_reply.author.username }}</a></td>
+                <td>{{ thread.forum }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <h2>Most Active Threads</h2>
+    
+    <table>
+        {% for thread in most_active_threads %}
+            <tr>
+                <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a> &bull; {{ thread.last_reply.content|truncatewords:"5" }}</td>
+                <td>{{ thread.last_modified|timesince }} ago by <a href="{# url user_page thread.author.id #}">{{ thread.last_reply.author.username }}</a></td>
+                <td>{{ thread.forum }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <h2>Most Viewed Threads</h2>
+    
+    <table>
+        {% for thread in most_viewed_threads %}
+            <tr>
+                <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a> &bull; {{ thread.last_reply.content|truncatewords:"5" }}</td>
+                <td>{{ thread.last_modified|timesince }} ago by <a href="{# url user_page thread.author.id #}">{{ thread.last_reply.author.username }}</a></td>
+                <td>{{ thread.forum }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

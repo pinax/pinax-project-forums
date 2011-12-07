@@ -1,0 +1,26 @@
+{% extends "agora/base.html" %}
+
+{% block body %}
+
+<h3>Forum Post</h3>
+
+<form action="{% url agora_new_post forum_id %}" method="POST">
+    {% csrf_token %}
+    <p>
+        <label>Title</label>
+        <br/>
+        <input type="text" name="title" />
+    </p>
+    
+    <p>
+        <label>Content</label>
+        <br/>
+        <textarea name="content" rows="10"></textarea>
+    </p>
+    
+    <p>
+        <input type="submit" value="Post" />
+    </p>
+
+</form>
+{% endblock %}
