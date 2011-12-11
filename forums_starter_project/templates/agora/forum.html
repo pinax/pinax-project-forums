@@ -17,18 +17,18 @@
                 {% if forum.parent %}
                     {% if forum.parent.category %}
                         {% if forum.parent.category.parent %}
-                            <str> &raquo; </str>
+                            <span class="divider">&raquo;</span>
                             <a href="{% url agora_category forum.parent.category.parent.id %}">{{ forum.parent.category.parent.title }}</a>
                         {% endif %}
-                        <str> &raquo; </str> 
+                        <span class="divider">&raquo;</span>
                         <a href="{% url agora_category forum.parent.category.id %}">{{ forum.parent.category.title }}</a>
                     {% else %}
                         {% if forum.parent.parent %}
-                            <str> &raquo; </str>
+                            <span class="divider">&raquo;</span>
                             <a href="{% url agora_forum forum.parent.parent.id %}">{{ forum.parent.parent.title }}</a>
                         {% endif %}
                     {% endif %}
-                    <str> &raquo; </str> 
+                    <span class="divider">&raquo;</span>
                     <a href="{% url agora_forum forum.parent.id %}">{{ forum.parent.title }}</a>
                 {% endif %}
             {% endif %}
