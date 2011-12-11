@@ -25,7 +25,7 @@ urlpatterns = patterns("",
     url(r"^announcements/", include("announcements.urls")),
     
     url(r"^avatar/", include("avatar.urls")),
-    url(r"forums/", include("agora.urls")),
+    url(r"^forums/", include("agora.urls")),
 )
 
 
