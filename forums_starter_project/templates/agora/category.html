@@ -5,12 +5,12 @@
 {% block body %}
     
     <div>
-        <small class="breadcrumbs">
+        <div class="breadcrumb">
             <a href="{% url agora_forums %}">Forums</a>
-            {% if category.parent %}<str> &raquo; </str>
+            {% if category.parent %}<span class="divider">&raquo;</span>
                 <a href="{% url agora_category category.parent.id %}">{{ category.parent.title }}</a>{% endif %}
-            <str> &raquo; </str> 
-        </small>
+            <span class="divider">&raquo;</span>
+        </div>
         <h2>{{ category.title }}</h2>
         <p>
             {{ category.forums.all.count }} Forum{{ category.forums.all.count|pluralize }}

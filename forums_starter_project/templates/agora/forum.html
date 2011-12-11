@@ -4,14 +4,14 @@
 
 {% block body %}
     <div>
-        <small class="breadcrumbs">
+        <div class="breadcrumb">
             <a href="{% url agora_forums %}">Forums</a>
             {% if forum.category %}
                 {% if forum.category.parent %}
-                    <str> &raquo; </str>
+                    <span class="divider">&raquo;</span>
                     <a href="{% url agora_category forum.category.parent.id %}">{{ forum.category.parent.title }}</a>
                 {% endif %}
-                <str> &raquo; </str> 
+                <span class="divider">&raquo;</span>
                 <a href="{% url agora_category forum.category.id %}">{{ forum.category.title }}</a>
             {% else %}
                 {% if forum.parent %}
@@ -32,8 +32,8 @@
                     <a href="{% url agora_forum forum.parent.id %}">{{ forum.parent.title }}</a>
                 {% endif %}
             {% endif %}
-            <str> &raquo; </str> 
-        </small>
+            <span class="divider">&raquo;</span>
+        </div>
         <h2>{{ forum.title }}</h2>
         <p>
             {{ forum.last_modified|date }}
