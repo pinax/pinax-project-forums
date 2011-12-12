@@ -39,7 +39,7 @@
         </div>
         <h2>{{ thread.title }}</h2>
         <p>
-            Started {{ thread.creation_date|timesince }} ago
+            Started {{ thread.created|timesince }} ago
             <str> &bull; </str>
             {{ thread.view_count }} View{{ thread.view_count|pluralize }}
             <str> &bull; </str>
