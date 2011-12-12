@@ -29,27 +29,31 @@
         </ul>
     {% endif %}
     
-    <table>
-        <tr>
-            <th>Forum Name</th>
-            <th>Last Post</th>
-            <th>Threads</th>
-            <th>Posts</th>
-        </tr>
-        {% for forum in forums %}
+    <table class="zebra-striped">
+        <thead>
             <tr>
-                <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a><br />
-                    <small>{{ forum.description }}</small></td>
-                {% if forum.last_reply %}
-                   <td><a href="{% url agora_thread forum.last_reply.thread.id %}">{{ forum.last_reply.thread.title }}</a><br />
-                   <small>by <a href="{# url user_page forum.last_reply.author.id #}">{{ forum.last_reply.author.username }}</a></small></td>
-                {% else %} 
-                    <td></td>
-                {% endif %}
-                <td>{{ forum.threads.all.count|intcomma }}</td>
-                <td>{{ forum.reply_count|intcomma }}</td>
+                <th>Forum Name</th>
+                <th>Last Post</th>
+                <th>Threads</th>
+                <th>Posts</th>
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+            {% for forum in forums %}
+                <tr>
+                    <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a><br />
+                        <small>{{ forum.description }}</small></td>
+                    {% if forum.last_reply %}
+                       <td><a href="{% url agora_thread forum.last_reply.thread.id %}">{{ forum.last_reply.thread.title }}</a><br />
+                       <small>by <a href="{# url user_page forum.last_reply.author.id #}">{{ forum.last_reply.author.username }}</a></small></td>
+                    {% else %} 
+                        <td></td>
+                    {% endif %}
+                    <td>{{ forum.threads.all.count|intcomma }}</td>
+                    <td>{{ forum.reply_count|intcomma }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
     <div>
         @@@ pagination
