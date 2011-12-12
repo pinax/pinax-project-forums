@@ -4,23 +4,17 @@
 
 <h3>Forum Post</h3>
 
-<form action="{% url agora_new_post forum_id %}" method="POST">
+<form action="{% url agora_new_post forum_id %}" method="POST" class="form-stacked">
     {% csrf_token %}
-    <p>
-        <label>Title</label>
-        <br/>
-        <input type="text" name="title" />
-    </p>
-    
-    <p>
-        <label>Content</label>
-        <br/>
-        <textarea name="content" rows="10"></textarea>
-    </p>
-    
-    <p>
-        <input type="submit" value="Post" />
-    </p>
+    <fieldset>
+            <label>Title</label>
+            <input type="text" name="title" class="span8" />
 
+            <label>Content</label>
+            <textarea name="content" rows="10" class="span8"></textarea>
+    </fieldset>
+    <div class="actions">
+        <input class="btn primary" type="submit" value="Post" />
+    </div>
 </form>
 {% endblock %}
