@@ -91,7 +91,7 @@
             {% for thread in threads %}
                 <tr>
                     <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br />
-                        <small>by <a href="{# url user_page thread.author.id #}">{{ thread.author.username }}</a> {{ thread.creation_date|timesince}} ago </small></td>
+                        <small>by <a href="{# url user_page thread.author.id #}">{{ thread.author.username }}</a> {{ thread.created|timesince}} ago </small></td>
                     <td>{# <a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br /> #}
                         <small>by <a href="{# url user_page thread.last_reply.author.id #}">{{ thread.last_reply.author.username }}</a> {{ thread.last_reply.created|timesince}} ago</small></td>
                     <td>{{ thread.reply_count|intcomma }}</td>
