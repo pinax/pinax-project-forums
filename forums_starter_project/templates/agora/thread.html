@@ -96,22 +96,19 @@
     {% endfor %}
         
     {% if user.is_authenticated %}
-        <h2>Post</h2>
-        <div class="last comment">
-            <div class="comment_user">
+        <h2>Reply</h2>
+        <div>
                 <h3>You say:</h3>
-                {# <img height="69" width="69" alt="" src="{% avatar_url member "w=69,h=69" %}" /> #}
-            </div><!-- /user -->
-            
-            <form action="" method="post" class="form-stacked">
+                <div style="float: left; margin-right: 10px;">{% avatar user 69 %}</div>
+                <form action="" method="post" class="form-stacked">
                 {% csrf_token %}
                 <textarea name="content" class="span8" rows="5"></textarea>
                 <div class="actions">
                     <input class="btn primary" type="submit" value="reply" />
                 </div>
-            </form>
-            <div class="clear"></div>
-        </div><!-- /comment -->
+                </form>
+                <div class="clear"></div>
+        </div>
     {% endif %}
     
     <div>@@@ pagination</div>
