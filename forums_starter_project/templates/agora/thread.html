@@ -57,42 +57,39 @@
     <div>@@@ pagination</div>
     
     {% for post in posts %}
-        <div id="post-{{ post.id }}" class="post">
-            <div class="post-top">
-                <div class="post-bottom">
-                    <div class="side">
-                        <a class="thumb" href="{# url user_page post.author.id #}">{% avatar post.author 69 %}</a>
-                        <h3><a href="{# url user_page post.author.id #}">{{ post.author.username }}</a></h3>
-                        @@@ points, stars, level
-                        <dl><dt>Posts</dt>
-                            <dd>{{ post.author.post_count.all.0.count|intcomma }}</dd>
-                        </dl>
+        <div id="post-{{ post.id }}" class="post row">
+            <div class="span4">
+                <a class="thumb" href="{# url user_page post.author.id #}">{% avatar post.author 69 %}</a>
+                <h3><a href="{# url user_page post.author.id #}">{{ post.author.username }}</a></h3>
+                @@@ points, stars, level
+                <dl><dt>Posts</dt>
+                    <dd>{{ post.author.post_count.all.0.count|intcomma }}</dd>
+                </dl>
+            </div>
+            
+            <div class="span12">
+                <div style="min-height: 120px;">{{ post.content|urlize|linebreaks }}</div>
+                <div class="signature">
+                    <p>{{ member.forum_signature }}</p>
+                </div>
+                <div class="controls">
+                    {% if user.is_authenticated %}
+                        @@@ rating?
+                    {% endif %}
+                    <span class="timesince">{{ post.created|timesince }} ago</span>
+                    {% if user.is_authenticated %}
+                    <div class="buttons">
+                        @@@ bookmark
+                        <a class="btn small" href="{# url forum_report post.id #}">Report</a>
+                        <a class="btn small" href="{% url agora_reply thread.id %}?quote={{ post.id }}">Quote</a>
+                        <a class="btn small" href="{% url agora_reply thread.id %}">Reply</a>
+                        {# if post|post_editable:member %}<a href="{% url agora_reply_edit post.id %}" class="edit open_lightbox">Edit</a>{% endif #}
                     </div>
-                    <div class="post_content">
-                        {{ post.content|urlize|linebreaks }}
-                        <div class="signature">
-                            <p>{{ member.forum_signature }}</p>
-                        </div>
-                        <div class="controls">
-                            {% if user.is_authenticated %}
-                                @@@ rating?
-                            {% endif %}
-                            <span class="timesince">{{ post.created|timesince }} ago</span>
-                            {% if user.is_authenticated %}
-                            <div class="buttons">
-                                @@@ bookmark
-                                <a class="btn small" href="{# url forum_report post.id #}">Report</a>
-                                <a class="btn small" href="{% url agora_reply thread.id %}?quote={{ post.id }}">Quote</a>
-                                <a class="btn small" href="{% url agora_reply thread.id %}">Reply</a>
-                                {# if post|post_editable:member %}<a href="{% url agora_reply_edit post.id %}" class="edit open_lightbox">Edit</a>{% endif #}
-                            </div>
-                            {% endif %}
-                        </div><!-- /controls -->
-                    </div><!-- /post -->
-                    <div class="clear"></div>
+                    {% endif %}
                 </div>
             </div>
-        </div><!-- /post -->
+            <div class="clear"></div>
+        </div>
     {% endfor %}
         
     {% if user.is_authenticated %}
