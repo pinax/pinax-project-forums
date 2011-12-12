@@ -34,6 +34,11 @@
             {% endif %}
             <span class="divider">&raquo;</span>
         </div>
+        {% if user.is_authenticated %}
+            <div style="float: right;">
+                <a class="btn" href="{% url agora_new_post forum.id %}">Make a New Post</a>
+            </div>
+        {% endif %}
         <h2>{{ forum.title }}</h2>
         <p>
             {{ forum.last_modified|date }}
@@ -42,9 +47,6 @@
             <str> &bull; </str>
             {{ forum.reply_count|intcomma }} post{{ forum.reply_count|pluralize }}
         </p>
-        {% if user.is_authenticated %}
-            <a href="{% url agora_new_post forum.id %}">Make a New Post</a>
-        {% endif %}
     </div>
     
     {% if forum.subforums.all %}
