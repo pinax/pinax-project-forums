@@ -50,47 +50,55 @@
     </div>
     
     {% if forum.subforums.all %}
-        <table>
-            <tr>
-                <th>Sub-Forum Name</th>
-                <th>Last Post</th>
-                <th>Threads</th>
-                <th>Posts</th>
-            </tr>
-            {% for subforum in forum.subforums.all %}
+        <table class="zebra-striped">
+            <thead>
                 <tr>
-                    <td><a href="{% url agora_forum subforum.id %}">{{ subforum.title }}</a><br />
-                        <small>{{ subforum.description }}</small></td>
-                    {% if subforum.last_reply %}
-                       <td><a href="{% url agora_thread subforum.last_reply.thread.id %}">{{ subforum.last_reply.thread.title }}</a><br />
-                       <small>by <a href="{# url user_page subforum.last_reply.author.id #}">{{ subforum.last_reply.author.username }}</a></small></td>
-                    {% else %} 
-                        <td></td>
-                    {% endif %}
-                    <td>{{ subforum.threads.all.count|intcomma }}</td>
-                    <td>{{ subforum.reply_count|intcomma }}</td>
+                    <th>Sub-Forum Name</th>
+                    <th>Last Post</th>
+                    <th>Threads</th>
+                    <th>Posts</th>
                 </tr>
-            {% endfor %}
+            </thead>
+            <tbody>
+                {% for subforum in forum.subforums.all %}
+                    <tr>
+                        <td><a href="{% url agora_forum subforum.id %}">{{ subforum.title }}</a><br />
+                            <small>{{ subforum.description }}</small></td>
+                        {% if subforum.last_reply %}
+                           <td><a href="{% url agora_thread subforum.last_reply.thread.id %}">{{ subforum.last_reply.thread.title }}</a><br />
+                           <small>by <a href="{# url user_page subforum.last_reply.author.id #}">{{ subforum.last_reply.author.username }}</a></small></td>
+                        {% else %} 
+                            <td></td>
+                        {% endif %}
+                        <td>{{ subforum.threads.all.count|intcomma }}</td>
+                        <td>{{ subforum.reply_count|intcomma }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
         </table>
     {% endif %}
     
-    <table>
-        <tr>
-            <th>Thread Title</th>
-            <th>Last Post</th>
-            <th>Replies</th>
-            <th>Views</th>
-        </tr>
-        {% for thread in threads %}
+    <table class="zebra-striped">
+        <thead>
             <tr>
-                <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br />
-                    <small>by <a href="{# url user_page thread.author.id #}">{{ thread.author.username }}</a> {{ thread.creation_date|timesince}} ago </small></td>
-                <td>{# <a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br /> #}
-                    <small>by <a href="{# url user_page thread.last_reply.author.id #}">{{ thread.last_reply.author.username }}</a> {{ thread.last_reply.created|timesince}} ago</small></td>
-                <td>{{ thread.reply_count|add:"-1"|intcomma }}</td>
-                <td>{{ thread.view_count|intcomma }}</td>
+                <th>Thread Title</th>
+                <th>Last Post</th>
+                <th>Replies</th>
+                <th>Views</th>
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+            {% for thread in threads %}
+                <tr>
+                    <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br />
+                        <small>by <a href="{# url user_page thread.author.id #}">{{ thread.author.username }}</a> {{ thread.creation_date|timesince}} ago </small></td>
+                    <td>{# <a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br /> #}
+                        <small>by <a href="{# url user_page thread.last_reply.author.id #}">{{ thread.last_reply.author.username }}</a> {{ thread.last_reply.created|timesince}} ago</small></td>
+                    <td>{{ thread.reply_count|add:"-1"|intcomma }}</td>
+                    <td>{{ thread.view_count|intcomma }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
     
     <div>@@@ pagination</div>
