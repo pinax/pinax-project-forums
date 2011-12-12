@@ -43,7 +43,7 @@
             <str> &bull; </str>
             {{ thread.view_count }} View{{ thread.view_count|pluralize }}
             <str> &bull; </str>
-            {{ thread.reply_count|add:"-1" }} Repl{{ thread.reply_count|add:"-1"|pluralize:"y,ies" }}
+            {{ thread.reply_count }} Repl{{ thread.reply_count|pluralize:"y,ies" }}
         </p>
         <div>
             {{ thread.content|urlize|linebreaks }}
