@@ -21,7 +21,7 @@
             <tr>
                 <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a></td>
                 <td>{{ forum.category }}</td>
-                <td>{{ forum.reply_count }} post{{ forum.reply_count|pluralize }}</td>
+                <td>{{ forum.post_count }} post{{ forum.post_count|pluralize }}</td>
             </tr>
         {% endfor %}
     </table>

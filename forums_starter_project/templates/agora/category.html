@@ -50,7 +50,7 @@
                         <td></td>
                     {% endif %}
                     <td>{{ forum.threads.all.count|intcomma }}</td>
-                    <td>{{ forum.reply_count|intcomma }}</td>
+                    <td>{{ forum.post_count|intcomma }}</td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -43,9 +43,9 @@
         <p>
             {{ forum.last_modified|date }}
             <str> &bull; </str>
-            {{ forum.threads.all.count|intcomma }} Thread{{ forum.threads.all.count|pluralize }}
+            {{ forum.threads.all.count|intcomma }} thread{{ forum.threads.all.count|pluralize }}
             <str> &bull; </str>
-            {{ forum.reply_count|intcomma }} post{{ forum.reply_count|pluralize }}
+            {{ forum.post_count|intcomma }} post{{ forum.post_count|pluralize }}
         </p>
     </div>
     
@@ -64,14 +64,14 @@
                     <tr>
                         <td><a href="{% url agora_forum subforum.id %}">{{ subforum.title }}</a><br />
                             <small>{{ subforum.description }}</small></td>
-                        {% if subforum.last_reply %}
-                           <td><a href="{% url agora_thread subforum.last_reply.thread.id %}">{{ subforum.last_reply.thread.title }}</a><br />
-                           <small>by <a href="{# url user_page subforum.last_reply.author.id #}">{{ subforum.last_reply.author.username }}</a></small></td>
+                        {% if subforum.last_post %}
+                           <td><a href="{% url agora_thread subforum.last_post.thread.id %}">{{ subforum.last_post.thread.title }}</a><br />
+                           <small>by <a href="{# url user_page subforum.last_post.author.id #}">{{ subforum.last_post.author.username }}</a></small></td>
                         {% else %} 
                             <td></td>
                         {% endif %}
                         <td>{{ subforum.threads.all.count|intcomma }}</td>
-                        <td>{{ subforum.reply_count|intcomma }}</td>
+                        <td>{{ subforum.post_count|intcomma }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -93,7 +93,7 @@
                     <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br />
                         <small>by <a href="{# url user_page thread.author.id #}">{{ thread.author.username }}</a> {{ thread.created|timesince}} ago </small></td>
                     <td>{# <a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br /> #}
-                        <small>by <a href="{# url user_page thread.last_reply.author.id #}">{{ thread.last_reply.author.username }}</a> {{ thread.last_reply.created|timesince}} ago</small></td>
+                        <small>by <a href="{# url user_page thread.last_post.author.id #}">{{ thread.last_post.author.username }}</a> {{ thread.last_post.created|timesince}} ago</small></td>
                     <td>{{ thread.reply_count|intcomma }}</td>
                     <td>{{ thread.view_count|intcomma }}</td>
                 </tr>
