@@ -2,9 +2,11 @@
 
 {% block body %}
 
+{% include "agora/_thread_breadcrumbs.html" with thread=thread %}
+
 <h3>Post a Reply</h3>
 
-<form action="{% url agora_reply thread_id %}" method="POST">
+<form action="{% url agora_reply thread.pk %}" method="POST">
     {% csrf_token %} 
     <textarea name="content" rows="10">{% if quote_content %}{{ quote_content }}{% endif %}</textarea>
     <br/>
