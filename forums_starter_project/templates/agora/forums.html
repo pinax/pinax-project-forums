@@ -107,9 +107,10 @@
     
     <div class="row">
         {% for member_count in most_active_members %}
-            <div class="span3">
+            <div class="span2">
                 {% avatar member_count.user 49 %}<br />
-                {{ member_count.user.username}} &bull; {{ member_count.count }} Post{{ member_count.count|pluralize }}
+                <a href="#">{{ member_count.user.username}}</a><br />
+                {{ member_count.count }} Post{{ member_count.count|pluralize }}
             </div>
         {% endfor %}
     </div>
