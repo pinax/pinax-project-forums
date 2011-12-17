@@ -40,7 +40,7 @@
             </div>
             
             <div class="span12">
-                <div style="min-height: 120px;">{{ post.content|urlize|linebreaks }}</div>
+                <div style="min-height: 120px;">{{ post.content_html|safe }}</div>
                 <div class="signature">
                     <p>{{ member.forum_signature }}</p>
                 </div>
