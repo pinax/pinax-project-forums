@@ -52,9 +52,9 @@
             <table class="zebra-striped">
                 {% for post in latest_posts %}
                     <tr>
-                        <td><a href="{% url agora_thread post.thread.id %}#post-{{ post.id }}">{{ post.thread.title }}</a><br />{{ post.content|truncatewords:"5" }}</td>
-                        <td>{{ post.created|timesince }} ago<br />by <a href="{# url user_page post.author.id #}">{{ post.author.username }}</a></td>
-                        <td><a href="{% url agora_forum post.thread.forum.id %}">{{ post.thread.forum }}</td>
+                        <td><a href="{% url agora_thread post.thread.id %}#post-{{ post.id }}">{{ post.thread.title }}</a></td>
+                        <td>by <a href="{# url user_page post.author.id #}">{{ post.author.username }}</a> {{ post.created|timesince }} ago</td>
+                        <td><a href="{% url agora_forum post.thread.forum.id %}">{{ post.thread.forum }}</a></td>
                     </tr>
                 {% endfor %}
             </table>
@@ -65,8 +65,8 @@
             <table class="zebra-striped">
                 {% for thread in latest_threads %}
                     <tr>
-                        <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br />{{ thread.last_post.content|truncatewords:"5" }}</td>
-                        <td>{{ thread.last_modified|timesince }} ago<br />by <a href="{# url user_page thread.author.id #}">{{ thread.last_post.author.username }}</a></td>
+                        <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a>
+                        <td>by <a href="{# url user_page thread.author.id #}">{{ thread.last_post.author.username }}</a> {{ thread.last_modified|timesince }} ago</td>
                         <td><a href="{% url agora_forum thread.forum.id %}">{{ thread.forum }}</td>
                     </tr>
                 {% endfor %}
