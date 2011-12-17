@@ -34,7 +34,7 @@
             {% endif %}
             <span class="divider">&raquo;</span>
         </div>
-        {% if user.is_authenticated and can_create_thread and not forum.closed %}
+        {% if can_create_thread %}
             <div style="float: right;">
                 <a class="btn" href="{% url agora_post_create forum.id %}">Make a New Post</a>
             </div>
