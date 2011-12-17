@@ -3,6 +3,7 @@
 {% load humanize %}
 {% load avatar_tags %}
 {% load agora_tags %}
+{% load bootstrap_tags %}
 
 {% block body %}
     {% include "agora/_thread_breadcrumbs.html" with thread=thread %}
@@ -71,19 +72,21 @@
         </div>
     {% endfor %}
     <hr />
-    {% if user.is_authenticated %}
+    {% if reply_form %}
         <h2>Quick Reply</h2>
         <div>
-                <h3>You say:</h3>
-                <div style="float: left; margin-right: 10px;">{% avatar user 69 %}</div>
-                <form action="" method="post" class="form-stacked">
+            <h3>You say:</h3>
+            <div style="float: left; margin-right: 10px;">{% avatar user 69 %}</div>
+            <form action="" method="POST" class="form-stacked">
                 {% csrf_token %}
-                <textarea name="content" class="span8" rows="5"></textarea>
+                <fieldset>
+                    {{ reply_form|as_bootstrap }}
+                </fieldset>
                 <div class="actions">
                     <input class="btn primary" type="submit" value="reply" />
                 </div>
-                </form>
-                <div class="clear"></div>
+            </form>
+            <div class="clear"></div>
         </div>
     {% endif %}
     
