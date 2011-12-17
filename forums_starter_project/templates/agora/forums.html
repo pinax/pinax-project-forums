@@ -6,6 +6,7 @@
 {% block body %}
     <h1>Forums</h1>
     
+    {% if categories %}
     <h2>Categories</h2>
     
     <ul>
@@ -13,90 +14,103 @@
             <li><a href="{% url agora_category category.id %}">{{ category.title }}</a></li>
         {% endfor %}
     </ul>
+    {% endif %}
     
-    <h2>Most Active Forums</h2>
+    <div class="row">
+        <div class="span8">
+            <h2>Most Active Forums</h2>
+            
+            <table class="zebra-striped">
+                {% for forum in most_active_forums %}
+                    <tr>
+                        <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a></td>
+                        {% if categories %}<td>{{ forum.category|default:"" }}</td>{% endif %}
+                        <td>{{ forum.post_count }} post{{ forum.post_count|pluralize }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="span8">
+            <h2>Most Viewed Forums</h2>
+            
+            <table class="zebra-striped">
+                {% for forum in most_viewed_forums %}
+                    <tr>
+                        <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a></td>
+                        {% if categories %}<td>{{ forum.category|default:"" }}</td>{% endif %}
+                        <td>{{ forum.view_count }} view{{ forum.view_count|pluralize }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
     
-    <table>
-        {% for forum in most_active_forums %}
-            <tr>
-                <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a></td>
-                <td>{{ forum.category }}</td>
-                <td>{{ forum.post_count }} post{{ forum.post_count|pluralize }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="row">
+        <div class="span8">
+            <h2>Latest Posts</h2>
+            
+            <table class="zebra-striped">
+                {% for post in latest_posts %}
+                    <tr>
+                        <td><a href="{% url agora_thread post.thread.id %}#post-{{ post.id }}">{{ post.thread.title }}</a><br />{{ post.content|truncatewords:"5" }}</td>
+                        <td>{{ post.created|timesince }} ago<br />by <a href="{# url user_page post.author.id #}">{{ post.author.username }}</a></td>
+                        <td><a href="{% url agora_forum post.thread.forum.id %}">{{ post.thread.forum }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="span8">
+            <h2>Latest Threads</h2>
+            
+            <table class="zebra-striped">
+                {% for thread in latest_threads %}
+                    <tr>
+                        <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br />{{ thread.last_post.content|truncatewords:"5" }}</td>
+                        <td>{{ thread.last_modified|timesince }} ago<br />by <a href="{# url user_page thread.author.id #}">{{ thread.last_post.author.username }}</a></td>
+                        <td><a href="{% url agora_forum thread.forum.id %}">{{ thread.forum }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
     
-    <h2>Most Viewed Forums</h2>
-    
-    <table>
-        {% for forum in most_viewed_forums %}
-            <tr>
-                <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a></td>
-                <td>{{ forum.category }}</td>
-                <td>{{ forum.view_count }} view{{ forum.view_count|pluralize }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="row">
+        <div class="span8">
+            <h2>Most Active Threads</h2>
+            
+            <table class="zebra-striped">
+                {% for thread in most_active_threads %}
+                    <tr>
+                        <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a></td>
+                        <td><a href="{% url agora_forum thread.forum.id %}">{{ thread.forum }}</td>
+                        <td>{{ thread.reply_count }} repl{{ thread.reply_count|pluralize:"y,ies" }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="span8">
+            <h2>Most Viewed Threads</h2>
+            
+            <table class="zebra-striped">
+                {% for thread in most_viewed_threads %}
+                    <tr>
+                        <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a></td>
+                        <td><a href="{% url agora_forum thread.forum.id %}">{{ thread.forum }}</td>
+                        <td>{{ thread.view_count }} view{{ thread.view_count|pluralize }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
     
     <h2>Most Active Members</h2>
     
-    <table>
+    <div class="row">
         {% for member_count in most_active_members %}
-            <tr>
-                <td><a href="{# url user_page member_count.member.id #}" class="thumb">
-                {% avatar member_count.user 49 %}
-                </a></td>
-                <td><a href="{# url user_page member_count.user.id #}">{{ member_count.user.username }}</a></td>
-                <td>{{ member_count.count }} Post{{ member_count.count|pluralize }}</td>
-            </tr>
-    {% endfor %}
-    </table>
-    
-    <h2>Latest Posts</h2>
-    
-    <table>
-        {% for post in latest_posts %}
-            <tr>
-                <td><a href="{% url agora_thread post.thread.id %}#post-{{ post.id }}">{{ post.thread.title }}</a> &bull; {{ post.content|truncatewords:"5" }}</td>
-                <td>{{ post.created|timesince }} ago by <a href="{# url user_page post.author.id #}">{{ post.author.username }}</a></td>
-                <td>{{ post.thread.forum }}</td>
-            </tr>
+            <div class="span3">
+                {% avatar member_count.user 49 %}<br />
+                {{ member_count.user.username}} &bull; {{ member_count.count }} Post{{ member_count.count|pluralize }}
+            </div>
         {% endfor %}
-    </table>
-    
-    <h2>Latest Threads</h2>
-    
-    <table>
-        {% for thread in latest_threads %}
-            <tr>
-                <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a> &bull; {{ thread.last_reply.content|truncatewords:"5" }}</td>
-                <td>{{ thread.last_modified|timesince }} ago by <a href="{# url user_page thread.author.id #}">{{ thread.last_reply.author.username }}</a></td>
-                <td>{{ thread.forum }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    
-    <h2>Most Active Threads</h2>
-    
-    <table>
-        {% for thread in most_active_threads %}
-            <tr>
-                <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a> &bull; {{ thread.last_reply.content|truncatewords:"5" }}</td>
-                <td>{{ thread.last_modified|timesince }} ago by <a href="{# url user_page thread.author.id #}">{{ thread.last_reply.author.username }}</a></td>
-                <td>{{ thread.forum }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    
-    <h2>Most Viewed Threads</h2>
-    
-    <table>
-        {% for thread in most_viewed_threads %}
-            <tr>
-                <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a> &bull; {{ thread.last_reply.content|truncatewords:"5" }}</td>
-                <td>{{ thread.last_modified|timesince }} ago by <a href="{# url user_page thread.author.id #}">{{ thread.last_reply.author.username }}</a></td>
-                <td>{{ thread.forum }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    </div>
 {% endblock %}
