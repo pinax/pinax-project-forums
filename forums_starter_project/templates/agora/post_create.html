@@ -1,5 +1,7 @@
 {% extends "agora/base.html" %}
 
+{% load bootstrap_tags %}
+
 {% block body %}
 
 <h3>Forum Post</h3>
@@ -7,11 +9,7 @@
 <form action="{% url agora_post_create forum_id %}" method="POST" class="form-stacked">
     {% csrf_token %}
     <fieldset>
-        <label>Title</label>
-        <input type="text" name="title" class="span8" />
-        
-        <label>Content</label>
-        <textarea name="content" rows="10" class="span8"></textarea>
+        {{ form|as_bootstrap }}
     </fieldset>
     <div class="actions">
         <input class="btn primary" type="submit" value="Post" />

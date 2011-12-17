@@ -2,6 +2,7 @@
 
 {% load humanize %}
 {% load avatar_tags %}
+{% load agora_tags %}
 
 {% block body %}
     <div>
@@ -52,7 +53,7 @@
                         <a class="btn small" href="{# url forum_report post.id #}">Report</a>
                         <a class="btn small" href="{% url agora_reply_create thread.id %}?quote={{ post.id }}">Quote</a>
                         <a class="btn small" href="{% url agora_reply_create thread.id %}">Reply</a>
-                        {# if post|post_editable:member %}<a href="{% url agora_reply_create_edit post.id %}" class="edit open_lightbox">Edit</a>{% endif #}
+                        {% if post|post_editable:request.user %}<a class="btn small" href="{% url agora_post_edit post.kind post.id %}">Edit</a>{% endif %}
                     </div>
                     {% endif %}
                 </div>

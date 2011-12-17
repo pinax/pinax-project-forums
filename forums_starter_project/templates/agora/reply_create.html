@@ -1,17 +1,20 @@
 {% extends "agora/base.html" %}
 
+{% load bootstrap_tags %}
+
 {% block body %}
-
-{% include "agora/_thread_breadcrumbs.html" with thread=thread %}
-
-<h3>Post a Reply</h3>
-
-<form action="{% url agora_reply_create thread.pk %}" method="POST">
-    {% csrf_token %} 
-    <textarea name="content" rows="10">{% if quote_content %}{{ quote_content }}{% endif %}</textarea>
-    <br/>
-    <input type="submit" value="reply" />
+    {% include "agora/_thread_breadcrumbs.html" with thread=thread %}
     
-</form>
-
+    <h3>Post a Reply</h3>
+    
+    <form method="POST" action="{% url agora_reply_create thread.pk %}">
+        {% csrf_token %}
+        <fieldset>
+            {{ form|as_bootstrap }}
+        </fieldset>
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Post" />
+            <a href="{% url agora_thread thread.pk %}" class="btn">Cancel</a>
+        </div>
+    </form>
 {% endblock %}
