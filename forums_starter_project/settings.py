@@ -201,6 +201,7 @@ ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
 
 AUTHENTICATION_BACKENDS = [
     "pinax.apps.account.auth_backends.AuthenticationBackend",
+    "forums.auth_backends.PermissionBackend",
 ]
 
 LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
