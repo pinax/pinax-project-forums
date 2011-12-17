@@ -4,7 +4,7 @@
 
 <h3>Forum Post</h3>
 
-<form action="{% url agora_new_post forum_id %}" method="POST" class="form-stacked">
+<form action="{% url agora_post_create forum_id %}" method="POST" class="form-stacked">
     {% csrf_token %}
     <fieldset>
         <label>Title</label>

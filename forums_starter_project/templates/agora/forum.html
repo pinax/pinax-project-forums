@@ -36,7 +36,7 @@
         </div>
         {% if user.is_authenticated %}
             <div style="float: right;">
-                <a class="btn" href="{% url agora_new_post forum.id %}">Make a New Post</a>
+                <a class="btn" href="{% url agora_post_create forum.id %}">Make a New Post</a>
             </div>
         {% endif %}
         <h2>{{ forum.title }}</h2>

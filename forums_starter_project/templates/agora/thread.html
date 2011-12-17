@@ -18,7 +18,7 @@
             {{ thread.content|urlize|linebreaks }}
         </div>
         {% if user.is_authenticated %}
-            <a class="btn" href="{% url agora_reply thread.id %}">Post a Reply</a>
+            <a class="btn" href="{% url agora_reply_create thread.id %}">Post a Reply</a>
         {% endif %}
         <a href="?order_type={% ifequal order_type "asc" %}desc{% else %}asc{% endifequal %}">Reverse Reply Order</a>
     </div>
@@ -50,9 +50,9 @@
                     <div class="buttons">
                         @@@ bookmark
                         <a class="btn small" href="{# url forum_report post.id #}">Report</a>
-                        <a class="btn small" href="{% url agora_reply thread.id %}?quote={{ post.id }}">Quote</a>
-                        <a class="btn small" href="{% url agora_reply thread.id %}">Reply</a>
-                        {# if post|post_editable:member %}<a href="{% url agora_reply_edit post.id %}" class="edit open_lightbox">Edit</a>{% endif #}
+                        <a class="btn small" href="{% url agora_reply_create thread.id %}?quote={{ post.id }}">Quote</a>
+                        <a class="btn small" href="{% url agora_reply_create thread.id %}">Reply</a>
+                        {# if post|post_editable:member %}<a href="{% url agora_reply_create_edit post.id %}" class="edit open_lightbox">Edit</a>{% endif #}
                     </div>
                     {% endif %}
                 </div>
