@@ -34,12 +34,15 @@
             {% endif %}
             <span class="divider">&raquo;</span>
         </div>
-        {% if user.is_authenticated and can_create_thread %}
+        {% if user.is_authenticated and can_create_thread and not forum.closed %}
             <div style="float: right;">
                 <a class="btn" href="{% url agora_post_create forum.id %}">Make a New Post</a>
             </div>
         {% endif %}
-        <h2>{{ forum.title }}</h2>
+        <h2>
+            {{ forum.title }}
+            {% if forum.closed %}<span class="label">closed</span>{% endif %}
+        </h2>
         <div><big>{{ forum.description }}</big></div>
         <p>
             {{ forum.last_modified|date }}
