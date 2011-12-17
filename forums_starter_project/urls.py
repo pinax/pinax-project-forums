@@ -23,7 +23,7 @@ urlpatterns = patterns("",
     
     url(r"^avatar/", include("avatar.urls")),
     
-    url(r"^$", include("agora.urls")),
+    url(r"", include("agora.urls")),
 )
 
 
