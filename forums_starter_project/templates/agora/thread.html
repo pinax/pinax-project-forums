@@ -8,7 +8,10 @@
     {% include "agora/_thread_breadcrumbs.html" with thread=thread %}
     <div class="row">
         <div class="span12">
-            <h2>{{ thread.title }}</h2>
+            <h2>
+                {{ thread.title }}
+                {% if thread.sticky %}<span class="label notice">sticky</span>{% endif %}
+            </h2>
             <p>
                 Started {{ thread.created|timesince }} ago
                 <str> &bull; </str>

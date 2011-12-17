@@ -91,7 +91,8 @@
         <tbody>
             {% for thread in threads %}
                 <tr>
-                    <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br />
+                    <td><a href="{% url agora_thread thread.id %}"><b>{{ thread.title }}</b></a> {% if thread.sticky %}<span class="label notice">sticky</span>{% endif %}
+                    <br />
                         <small>by <a href="{# url user_page thread.author.id #}">{{ thread.author.username }}</a> {{ thread.created|timesince}} ago </small></td>
                     <td>{# <a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br /> #}
                         <small>by <a href="{# url user_page thread.last_post.author.id #}">{{ thread.last_post.author.username }}</a> {{ thread.last_post.created|timesince}} ago</small></td>
