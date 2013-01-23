@@ -7,14 +7,14 @@
     
     <h3>Post a Reply</h3>
     
-    <form method="POST" action="{% url agora_reply_create thread.pk %}">
+    <form method="POST" class="form form-horizontal" action="{% url agora_reply_create thread.pk %}">
         {% csrf_token %}
         <fieldset>
             {{ form|as_bootstrap }}
         </fieldset>
-        <div class="actions">
-            <input type="submit" class="btn primary" value="Post" />
+        <div class="form-actions">
             <a href="{% url agora_thread thread.pk %}" class="btn">Cancel</a>
+            <button type="submit" class="btn btn-primary">Post</button>
         </div>
     </form>
 {% endblock %}

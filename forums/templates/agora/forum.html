@@ -3,58 +3,23 @@
 {% load humanize %}
 
 {% block body %}
-    <div>
-        <div class="breadcrumb">
-            <a href="{% url agora_forums %}">Forums</a>
-            {% if forum.category %}
-                {% if forum.category.parent %}
-                    <span class="divider">&raquo;</span>
-                    <a href="{% url agora_category forum.category.parent.id %}">{{ forum.category.parent.title }}</a>
-                {% endif %}
-                <span class="divider">&raquo;</span>
-                <a href="{% url agora_category forum.category.id %}">{{ forum.category.title }}</a>
-            {% else %}
-                {% if forum.parent %}
-                    {% if forum.parent.category %}
-                        {% if forum.parent.category.parent %}
-                            <span class="divider">&raquo;</span>
-                            <a href="{% url agora_category forum.parent.category.parent.id %}">{{ forum.parent.category.parent.title }}</a>
-                        {% endif %}
-                        <span class="divider">&raquo;</span>
-                        <a href="{% url agora_category forum.parent.category.id %}">{{ forum.parent.category.title }}</a>
-                    {% else %}
-                        {% if forum.parent.parent %}
-                            <span class="divider">&raquo;</span>
-                            <a href="{% url agora_forum forum.parent.parent.id %}">{{ forum.parent.parent.title }}</a>
-                        {% endif %}
-                    {% endif %}
-                    <span class="divider">&raquo;</span>
-                    <a href="{% url agora_forum forum.parent.id %}">{{ forum.parent.title }}</a>
-                {% endif %}
-            {% endif %}
-            <span class="divider">&raquo;</span>
+    {% include "agora/_forum_breadcrumb.html" %}
+    
+    {% if can_create_thread %}
+        <div style="float: right;">
+            <a class="btn" href="{% url agora_post_create forum.id %}">Make a New Post</a>
         </div>
-        {% if can_create_thread %}
-            <div style="float: right;">
-                <a class="btn" href="{% url agora_post_create forum.id %}">Make a New Post</a>
-            </div>
-        {% endif %}
-        <h2>
-            {{ forum.title }}
-            {% if forum.closed %}<span class="label">closed</span>{% endif %}
-        </h2>
-        <div><big>{{ forum.description }}</big></div>
-        <p>
-            {{ forum.last_modified|date }}
-            <str> &bull; </str>
-            {{ forum.threads.all.count|intcomma }} thread{{ forum.threads.all.count|pluralize }}
-            <str> &bull; </str>
-            {{ forum.post_count|intcomma }} post{{ forum.post_count|pluralize }}
-        </p>
-    </div>
+    {% endif %}
+    
+    <h2>
+        {{ forum.title }}
+        {% if forum.closed %}<span class="label">closed</span>{% endif %}
+    </h2>
+    
+    <p class="lead">{{ forum.description }}</p>
     
     {% if forum.subforums.all %}
-        <table class="zebra-striped">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Sub-Forum Name</th>
@@ -82,7 +47,7 @@
         </table>
     {% endif %}
     
-    <table class="zebra-striped">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Thread Title</th>
@@ -109,5 +74,5 @@
         </tbody>
     </table>
     
-    <div>@@@ pagination</div>
+    {% include "pagination/pagination.html" %}
 {% endblock %}

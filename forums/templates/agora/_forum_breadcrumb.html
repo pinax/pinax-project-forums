@@ -1,0 +1,40 @@
+{% load humanize %}
+<div class="breadcrumb">
+    <a href="{% url agora_forums %}">Forums</a>
+    {% if forum.category %}
+        {% if forum.category.parent %}
+            <span class="divider">&raquo;</span>
+            <a href="{% url agora_category forum.category.parent.id %}">{{ forum.category.parent.title }}</a>
+        {% endif %}
+        <span class="divider">&raquo;</span>
+        <a href="{% url agora_category forum.category.id %}">{{ forum.category.title }}</a>
+    {% else %}
+        {% if forum.parent %}
+            {% if forum.parent.category %}
+                {% if forum.parent.category.parent %}
+                    <span class="divider">&raquo;</span>
+                    <a href="{% url agora_category forum.parent.category.parent.id %}">{{ forum.parent.category.parent.title }}</a>
+                {% endif %}
+                <span class="divider">&raquo;</span>
+                <a href="{% url agora_category forum.parent.category.id %}">{{ forum.parent.category.title }}</a>
+            {% else %}
+                {% if forum.parent.parent %}
+                    <span class="divider">&raquo;</span>
+                    <a href="{% url agora_forum forum.parent.parent.id %}">{{ forum.parent.parent.title }}</a>
+                {% endif %}
+            {% endif %}
+            <span class="divider">&raquo;</span>
+            <a href="{% url agora_forum forum.parent.id %}">{{ forum.parent.title }}</a>
+        {% endif %}
+    {% endif %}
+    <span class="divider">&raquo;</span>
+    <li class="active">{{ forum.title }}</li>
+    
+    <span class="pull-right">
+        {{ forum.last_modified|date }}
+        <str> &bull; </str>
+        {{ forum.threads.all.count|intcomma }} thread{{ forum.threads.all.count|pluralize }}
+        <str> &bull; </str>
+        {{ forum.post_count|intcomma }} post{{ forum.post_count|pluralize }}
+    </span>
+</div>

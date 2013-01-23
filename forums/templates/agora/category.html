@@ -3,59 +3,52 @@
 {% load humanize %}
 
 {% block body %}
-    
-    <div>
-        <div class="breadcrumb">
-            <a href="{% url agora_forums %}">Forums</a>
-            {% if category.parent %}<span class="divider">&raquo;</span>
-                <a href="{% url agora_category category.parent.id %}">{{ category.parent.title }}</a>{% endif %}
-            <span class="divider">&raquo;</span>
-        </div>
-        <h2>{{ category.title }}</h2>
-        <p>
-            {{ category.forums.all.count }} Forum{{ category.forums.all.count|pluralize }}
-            &bull;
-            {{ category.subcategories.all.count }} subcategor{{ category.subcategories.all.count|pluralize:"y,ies"}}
-        </p>
+    <div class="breadcrumb">
+        <a href="{% url agora_forums %}">Forums</a>
+        {% if category.parent %}<span class="divider">&raquo;</span>
+            <a href="{% url agora_category category.parent.id %}">{{ category.parent.title }}</a>{% endif %}
+        <span class="divider">&raquo;</span>
+        <li class="active">{{ category.title }}</li>
     </div>
     
-    {% if category.subcategories.all %}
-        <h2>Subcategories</h2>
-        
-        <ul>
-            {% for subcategory in category.subcategories.all %}
-                <li><a href="{% url agora_category subcategory.id %}">{{ subcategory.title }}</a></li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    
-    <table class="zebra-striped">
-        <thead>
-            <tr>
-                <th>Forum Name</th>
-                <th>Last Post</th>
-                <th>Threads</th>
-                <th>Posts</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for forum in forums %}
-                <tr>
-                    <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a><br />
-                        <small>{{ forum.description }}</small></td>
-                    {% if forum.last_reply %}
-                       <td><a href="{% url agora_thread forum.last_reply.thread.id %}">{{ forum.last_reply.thread.title }}</a><br />
-                       <small>by <a href="{# url user_page forum.last_reply.author.id #}">{{ forum.last_reply.author.username }}</a></small></td>
-                    {% else %} 
-                        <td></td>
-                    {% endif %}
-                    <td>{{ forum.threads.all.count|intcomma }}</td>
-                    <td>{{ forum.post_count|intcomma }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <div>
-        @@@ pagination
+    <div class="row">
+        <div class="span3">
+            <h3>{{ category.title }}</h3>
+            
+            <ul class="nav nav-pills nav-stacked">
+                {% for subcategory in category.subcategories.all %}
+                    <li><a href="{% url agora_category subcategory.id %}">{{ subcategory.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="span9">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Forum Name</th>
+                        <th>Last Post</th>
+                        <th>Threads</th>
+                        <th>Posts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for forum in forums %}
+                        <tr>
+                            <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a><br />
+                                <small>{{ forum.description }}</small></td>
+                            {% if forum.last_reply %}
+                               <td><a href="{% url agora_thread forum.last_reply.thread.id %}">{{ forum.last_reply.thread.title }}</a><br />
+                               <small>by <a href="{# url user_page forum.last_reply.author.id #}">{{ forum.last_reply.author.username }}</a></small></td>
+                            {% else %} 
+                                <td></td>
+                            {% endif %}
+                            <td>{{ forum.threads.all.count|intcomma }}</td>
+                            <td>{{ forum.post_count|intcomma }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% include "pagination/pagination.html" %}
+        </div>
     </div>
 {% endblock %}

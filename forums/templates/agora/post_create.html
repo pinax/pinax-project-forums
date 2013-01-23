@@ -3,17 +3,18 @@
 {% load bootstrap_tags %}
 
 {% block body %}
+    {% include "agora/_forum_breadcrumb.html" %}
+    
+    <h3>Forum Post</h3>
 
-<h3>Forum Post</h3>
-
-<form action="{% url agora_post_create forum_id %}" method="POST" class="form-stacked">
-    {% csrf_token %}
-    <fieldset>
-        {{ form|as_bootstrap }}
-    </fieldset>
-    <div class="actions">
-        <input class="btn primary" type="submit" value="Post" />
-        <a class="btn" href="{% url agora_forum forum_id %}">Cancel</a>
-    </div>
-</form>
+    <form action="{% url agora_post_create forum.pk %}" method="POST" class="form form-horizontal">
+        {% csrf_token %}
+        <fieldset>
+            {{ form|as_bootstrap }}
+        </fieldset>
+        <div class="form-actions">
+            <a class="btn" href="{% url agora_forum forum.pk %}">Cancel</a>
+            <button class="btn btn-primary" type="submit">Post</button>
+        </div>
+    </form>
 {% endblock %}

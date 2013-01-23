@@ -7,6 +7,7 @@
 
 {% block body %}
     {% include "agora/_thread_breadcrumbs.html" with thread=thread %}
+    
     <div class="row">
         <div class="span12">
             <h2>
@@ -84,18 +85,18 @@
             <div style="float: left; margin-right: 10px;">
                 <img src="{{ user.profile.avatar|thumbnail_url:'avatar-large' }}" />
             </div>
-            <form action="" method="POST" class="form-stacked">
+            <form action="" method="POST" class="form form-horizontal">
                 {% csrf_token %}
                 <fieldset>
                     {{ reply_form|as_bootstrap }}
                 </fieldset>
-                <div class="actions">
-                    <input class="btn primary" type="submit" value="reply" />
+                <div class="form-actions">
+                    <button class="btn primary" type="submit">Reply</button>
                 </div>
             </form>
             <div class="clear"></div>
         </div>
     {% endif %}
     
-    <div>@@@ pagination</div>
+    {% include "pagination/pagination.html" %}
 {% endblock %}
