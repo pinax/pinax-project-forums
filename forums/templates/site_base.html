@@ -1,0 +1,27 @@
+{% extends "theme_base.html" %}
+
+{% load url from future %}
+{% load staticfiles %}
+{% load metron_tags %}
+{% load i18n %}
+
+{% block site_brand %}<a class="brand" href="{% url "agora_forums" %}">{{ SITE_NAME }}</a>{% endblock %}
+
+{% block style_base %}
+    <link href="{% static "pinax/css/theme.css" %}" rel="stylesheet">
+    <link href="{% static "forums/css/forums.css" %}" rel="stylesheet">
+    {% block extra_style %}{% endblock %}
+{% endblock %}
+
+{% block extra_head_base %}
+    {% block extra_head %}{% endblock %}
+{% endblock %}
+
+{% block footer %}
+    {% include "_footer.html" %}
+{% endblock %}
+
+{% block extra_body_base %}
+    {% analytics %}
+    {% block extra_body %}{% endblock %}
+{% endblock %}
