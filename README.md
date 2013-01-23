@@ -1,9 +1,5 @@
-pinax-project-account
+forums-starter-project
 =====================
 
-a starter project the incorporates account features from django-user-accounts
-
-
-Usage:
-
-    django-admin.py startproject --template=https://github.com/pinax/pinax-project-account/zipball/master <project_name>
+a Pinax starter project that demonstrates the [agora](https://github.com/eldarion/agora)
+app and will eventually be an out-of-the-box forum project.
