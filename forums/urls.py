@@ -5,9 +5,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
-# import required to hook up receivers
-from . import receivers
-
 
 urlpatterns = patterns("",
     url(r"^admin/", include(admin.site.urls)),
