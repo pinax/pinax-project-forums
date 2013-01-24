@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, url
 
-from . import receivers
 from .views import ProfileEditView
 
 
