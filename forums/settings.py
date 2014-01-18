@@ -138,7 +138,7 @@ INSTALLED_APPS = [
     "eventlog",
     "easy_thumbnails",
     "agora",
-    
+
     # project
     "forums",
     "forums.profiles",

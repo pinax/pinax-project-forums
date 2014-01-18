@@ -14,17 +14,17 @@ def avatar_upload(instance, filename):
 
 
 class Profile(models.Model):
-    
+
     user = models.OneToOneField(User)
     name = models.CharField(max_length=75, blank=True)
     avatar = models.ImageField(upload_to=avatar_upload, blank=True)
     bio = models.TextField(blank=True)
     location = models.CharField(max_length=100, blank=True)
     website = models.CharField(max_length=250, blank=True)
-    
+
     created_at = models.DateTimeField(default=timezone.now)
     modified_at = models.DateTimeField(default=timezone.now)
-    
+
     def save(self, *args, **kwargs):
         self.modified_at = timezone.now()
         return super(Profile, self).save(*args, **kwargs)
