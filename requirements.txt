@@ -1,14 +1,12 @@
 --extra-index-url=http://dist.pinaxproject.com/dev/
 
-django-user-accounts==1.0b7
-metron==1.1
-pinax-utils==1.0b1.dev3
-eventlog==0.6
-django-jsonfield==0.8.11
-
-PIL==1.1.7
-easy-thumbnails==1.2
 Django==1.6.1
 pinax-theme-bootstrap==5.0.3
+django-user-accounts==1.0c3
 django-forms-bootstrap==3.0.0
+metron==1.3.1
+eventlog==0.7.0
+django-jsonfield==0.9.12
+Pillow==2.3.0
+easy-thumbnails==1.4
 git+https://github.com/eldarion/agora.git#egg=agora
