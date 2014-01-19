@@ -25,7 +25,7 @@
         </div>
         <div class="span4">
             {% if can_create_reply %}
-                <a class="btn" href="{% url agora_reply_create thread.id %}">Post a Reply</a>
+                <a class="btn" href="{% url "agora_reply_create" thread.pk %}">Post a Reply</a>
             {% endif %}
         </div>
     </div>
@@ -37,12 +37,12 @@
     
     {% for post in posts %}
         <hr />
-        <div id="post-{{ post.id }}" class="row">
+        <div id="post-{{ post.pk }}" class="row">
             <div class="span4">
-                <a class="thumb" href="{# url user_page post.author.id #}">
+                <a class="thumb" href="{# url user_page post.author.pk #}">
                     <img src="{{ post.author.profile.avatar|thumbnail_url:'avatar-large' }}" />
                 </a><br />
-                <a href="{# url user_page post.author.id #}">{{ post.author.username }}</a><br />
+                <a href="{# url user_page post.author.pk #}">{{ post.author.username }}</a><br />
                 {# @@@ points, stars, level #}
                 {{ post.author.post_count.all.0.count|intcomma }} post{{ post.author.post_count.all.0.count|pluralize }}
             </div>
@@ -65,12 +65,12 @@
                     </div>
                     <div class="span6">
                         {% if user.is_authenticated %}
-                        <a class="btn small" href="{# url forum_report post.id #}">Report</a>
+                        <a class="btn small" href="{# url forum_report post.pk #}">Report</a>
                         {% if can_create_reply %}
-                        <a class="btn small" href="{% url agora_reply_create thread.id %}?quote={{ post.id }}">Quote</a>
-                        <a class="btn small" href="{% url agora_reply_create thread.id %}">Reply</a>
+                        <a class="btn small" href="{% url "agora_reply_create" thread.pk %}?quote={{ post.pk }}">Quote</a>
+                        <a class="btn small" href="{% url "agora_reply_create" thread.pk %}">Reply</a>
                         {% endif %}
-                        {% if post|post_editable:request.user %}<a class="btn small" href="{% url agora_post_edit post.kind post.id %}">Edit</a>{% endif %}
+                        {% if post|post_editable:request.user %}<a class="btn small" href="{% url "agora_post_edit" post.kind post.pk %}">Edit</a>{% endif %}
                         {% endif %}
                     </div>
                 </div>
