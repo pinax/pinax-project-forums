@@ -1,20 +1,35 @@
 {% extends "agora/base.html" %}
 
+{% load thumbnail %}
 {% load bootstrap %}
 
 {% block body %}
     {% include "agora/_thread_breadcrumbs.html" with thread=thread %}
-    
-    <h3>Post a Reply</h3>
-    
-    <form method="POST" class="form form-horizontal" action="{% url agora_reply_create thread.pk %}">
-        {% csrf_token %}
-        <fieldset>
-            {{ form|bootstrap }}
-        </fieldset>
-        <div class="form-actions">
-            <a href="{% url agora_thread thread.pk %}" class="btn">Cancel</a>
-            <button type="submit" class="btn btn-primary">Post</button>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Post a Reply</h3>
         </div>
-    </form>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="{{ user.profile.avatar|thumbnail_url:'avatar-large' }}" />
+                </div>
+                <div class="col-md-10">
+                    <form method="POST" class="form" action="{% url "agora_reply_create" thread.pk %}">
+                        {% csrf_token %}
+                        {{ form|bootstrap }}
+                        <div class="form-actions pull-right">
+                            <a href="{% url "agora_thread" thread.pk %}" class="btn btn-default">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                Post
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
