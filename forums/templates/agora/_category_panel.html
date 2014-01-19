@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Categories</div>
+    {% if categories %}
+        <ul class="list-group">
+            {% for category in categories %}
+                <li class="list-group-item">
+                    <a href="{% url "agora_category" category.pk %}">
+                        {{ category.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="panel-body">
+            There are currently no categories
+        </div>
+    {% endif %}
+</div>

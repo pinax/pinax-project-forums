@@ -5,31 +5,14 @@
 {% block body %}
     <div class="row">
         <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">Categories</div>
-                {% if categories %}
-                    <ul class="list-group">
-                        {% for category in categories %}
-                            <li class="list-group-item">
-                                <a href="{% url "agora_category" category.pk %}">
-                                    {{ category.title }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <div class="panel-body">
-                        There are currently no categories
-                    </div>
-                {% endif %}
-            </div>
+            {% include "agora/_category_panel.html" %}
 
             <div class="panel panel-default">
                 <div class="panel-heading">Most Active Members</div>
                 {% if most_active_members %}
                     <ul class="list-group">
                         {% for member_count in most_active_members %}
-                            <li class="list-item">
+                            <li class="list-group-item">
                                 <img src="{{ member_count.user.profile.avatar|thumbnail_url:'avatar' }}" alt="{{ member_count.user.username }}" />
                                 <a href="">
                                     {{ member_count.user.username}}
