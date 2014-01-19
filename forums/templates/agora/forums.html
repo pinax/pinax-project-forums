@@ -10,7 +10,7 @@
                 {% if categories %}
                     <ul class="list-group">
                         {% for category in categories %}
-                            <li class="list-item">
+                            <li class="list-group-item">
                                 <a href="{% url "agora_category" category.pk %}">
                                     {{ category.title }}
                                 </a>
