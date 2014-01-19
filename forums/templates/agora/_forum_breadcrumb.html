@@ -1,33 +1,26 @@
 {% load humanize %}
-<div class="breadcrumb">
-    <a href="{% url agora_forums %}">Forums</a>
+<ol class="breadcrumb">
+    <li><a href="{% url "agora_forums" %}">Forums</a></li>
     {% if forum.category %}
         {% if forum.category.parent %}
-            <span class="divider">&raquo;</span>
-            <a href="{% url agora_category forum.category.parent.id %}">{{ forum.category.parent.title }}</a>
+            <li><a href="{% url "agora_category" forum.category.parent.pk %}">{{ forum.category.parent.title }}</a></li>
         {% endif %}
-        <span class="divider">&raquo;</span>
-        <a href="{% url agora_category forum.category.id %}">{{ forum.category.title }}</a>
+        <li><a href="{% url "agora_category" forum.category.pk %}">{{ forum.category.title }}</a></li>
     {% else %}
         {% if forum.parent %}
             {% if forum.parent.category %}
                 {% if forum.parent.category.parent %}
-                    <span class="divider">&raquo;</span>
-                    <a href="{% url agora_category forum.parent.category.parent.id %}">{{ forum.parent.category.parent.title }}</a>
+                    <li><a href="{% url "agora_category" forum.parent.category.parent.pk %}">{{ forum.parent.category.parent.title }}</a></li>
                 {% endif %}
-                <span class="divider">&raquo;</span>
-                <a href="{% url agora_category forum.parent.category.id %}">{{ forum.parent.category.title }}</a>
+                <li><a href="{% url "agora_category" forum.parent.category.pk %}">{{ forum.parent.category.title }}</a></li>
             {% else %}
                 {% if forum.parent.parent %}
-                    <span class="divider">&raquo;</span>
-                    <a href="{% url agora_forum forum.parent.parent.id %}">{{ forum.parent.parent.title }}</a>
+                    <li><a href="{% url "agora_forum" forum.parent.parent.pk %}">{{ forum.parent.parent.title }}</a></li>
                 {% endif %}
             {% endif %}
-            <span class="divider">&raquo;</span>
-            <a href="{% url agora_forum forum.parent.id %}">{{ forum.parent.title }}</a>
+            <li><a href="{% url "agora_forum" forum.parent.pk %}">{{ forum.parent.title }}</a></li>
         {% endif %}
     {% endif %}
-    <span class="divider">&raquo;</span>
     <li class="active">{{ forum.title }}</li>
     
     <span class="pull-right">
@@ -37,4 +30,4 @@
         <str> &bull; </str>
         {{ forum.post_count|intcomma }} post{{ forum.post_count|pluralize }}
     </span>
-</div>
+</ol>
