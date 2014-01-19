@@ -3,7 +3,7 @@
 {% load humanize %}
 {% load thumbnail %}
 {% load agora_tags %}
-{% load bootstrap_tags %}
+{% load bootstrap %}
 
 {% block body %}
     {% include "agora/_thread_breadcrumbs.html" with thread=thread %}
@@ -88,7 +88,7 @@
             <form action="" method="POST" class="form form-horizontal">
                 {% csrf_token %}
                 <fieldset>
-                    {{ reply_form|as_bootstrap }}
+                    {{ reply_form|bootstrap }}
                 </fieldset>
                 <div class="form-actions">
                     <button class="btn primary" type="submit">Reply</button>

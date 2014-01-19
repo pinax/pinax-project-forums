@@ -1,6 +1,6 @@
 {% extends "agora/base.html" %}
 
-{% load bootstrap_tags %}
+{% load bootstrap %}
 
 {% block body %}
     <h3>Edit post</h3>
@@ -8,7 +8,7 @@
     <form method="POST" class="form form-horizontal" action="{% url agora_post_edit post.kind post.id %}">
         {% csrf_token %}
         <fieldset>
-            {{ form|as_bootstrap }}
+            {{ form|bootstrap }}
         </fieldset>
         <div class="form-actions">
             <a href="{% url agora_thread post.thread.pk %}" class="btn">Cancel</a>

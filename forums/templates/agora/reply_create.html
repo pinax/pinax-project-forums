@@ -1,6 +1,6 @@
 {% extends "agora/base.html" %}
 
-{% load bootstrap_tags %}
+{% load bootstrap %}
 
 {% block body %}
     {% include "agora/_thread_breadcrumbs.html" with thread=thread %}
@@ -10,7 +10,7 @@
     <form method="POST" class="form form-horizontal" action="{% url agora_reply_create thread.pk %}">
         {% csrf_token %}
         <fieldset>
-            {{ form|as_bootstrap }}
+            {{ form|bootstrap }}
         </fieldset>
         <div class="form-actions">
             <a href="{% url agora_thread thread.pk %}" class="btn">Cancel</a>

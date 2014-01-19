@@ -1,6 +1,6 @@
 {% extends "agora/base.html" %}
 
-{% load bootstrap_tags %}
+{% load bootstrap %}
 
 {% block body %}
     {% include "agora/_forum_breadcrumb.html" %}
@@ -10,7 +10,7 @@
     <form action="{% url agora_post_create forum.pk %}" method="POST" class="form form-horizontal">
         {% csrf_token %}
         <fieldset>
-            {{ form|as_bootstrap }}
+            {{ form|bootstrap }}
         </fieldset>
         <div class="form-actions">
             <a class="btn" href="{% url agora_forum forum.pk %}">Cancel</a>
