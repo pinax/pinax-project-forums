@@ -3,99 +3,162 @@
 {% load thumbnail %}
 
 {% block body %}
-    <h1>Forums</h1>
-    
     <div class="row">
-        <div class="span3">
-            <h3>Categories</h3>
-            
-            <ul class="nav nav-pills nav-stacked">
-                {% for category in categories %}
-                    <li><a href="{% url agora_category category.id %}">{{ category.title }}</a></li>
-                {% endfor %}
-            </ul>
-            
-            <h3>Most Active Members</h3>
-            {% for member_count in most_active_members %}
-                <p>
-                    <img src="{{ member_count.user.profile.avatar|thumbnail_url:'avatar' }}" alt="{{ member_count.user.username }}" />
-                    <a href="#">{{ member_count.user.username}}</a><br />
-                    {{ member_count.count }} Post{{ member_count.count|pluralize }}
-                </p>
-            {% endfor %}
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">Categories</div>
+                {% if categories %}
+                    <ul class="list-group">
+                        {% for category in categories %}
+                            <li class="list-item">
+                                <a href="{% url "agora_category" category.pk %}">
+                                    {{ category.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="panel-body">
+                        There are currently no categories
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Most Active Members</div>
+                {% if most_active_members %}
+                    <ul class="list-group">
+                        {% for member_count in most_active_members %}
+                            <li class="list-item">
+                                <img src="{{ member_count.user.profile.avatar|thumbnail_url:'avatar' }}" alt="{{ member_count.user.username }}" />
+                                <a href="">
+                                    {{ member_count.user.username}}
+                                </a>
+                                ({{ member_count.count }} Post{{ member_count.count|pluralize }})
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="panel-body">
+                        There are no active members.
+                    </div>
+                {% endif %}
+            </div>
         </div>
-        <div class="span9">
-            <h3>Most Active Forums</h3>
-            
-            <table class="table table-striped">
-                {% for forum in most_active_forums %}
-                    <tr>
-                        <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a></td>
-                        {% if categories %}<td>{{ forum.category|default:"" }}</td>{% endif %}
-                        <td>{{ forum.post_count }} post{{ forum.post_count|pluralize }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-            
-            <h3>Most Viewed Forums</h3>
-            
-            <table class="table table-striped">
-                {% for forum in most_viewed_forums %}
-                    <tr>
-                        <td><a href="{% url agora_forum forum.id %}">{{ forum.title }}</a></td>
-                        {% if categories %}<td>{{ forum.category|default:"" }}</td>{% endif %}
-                        <td>{{ forum.view_count }} view{{ forum.view_count|pluralize }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-            
-            <h3>Latest Posts</h3>
-            
-            <table class="table table-striped">
-                {% for post in latest_posts %}
-                    <tr>
-                        <td><a href="{% url agora_thread post.thread.id %}#post-{{ post.id }}">{{ post.thread.title }}</a></td>
-                        <td>by <a href="{# url user_page post.author.id #}">{{ post.author.username }}</a> {{ post.created|timesince }} ago</td>
-                        <td><a href="{% url agora_forum post.thread.forum.id %}">{{ post.thread.forum }}</a></td>
-                    </tr>
-                {% endfor %}
-            </table>
-            
-            <h3>Latest Threads</h3>
-            
-            <table class="table table-striped">
-                {% for thread in latest_threads %}
-                    <tr>
-                        <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a>
-                        <td>by <a href="{# url user_page thread.author.id #}">{{ thread.last_post.author.username }}</a> {{ thread.last_modified|timesince }} ago</td>
-                        <td><a href="{% url agora_forum thread.forum.id %}">{{ thread.forum }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-            
-            <h3>Most Active Threads</h3>
-            
-            <table class="table table-striped">
-                {% for thread in most_active_threads %}
-                    <tr>
-                        <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a></td>
-                        <td><a href="{% url agora_forum thread.forum.id %}">{{ thread.forum }}</td>
-                        <td>{{ thread.reply_count }} repl{{ thread.reply_count|pluralize:"y,ies" }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-            
-            <h3>Most Viewed Threads</h3>
-            
-            <table class="table table-striped">
-                {% for thread in most_viewed_threads %}
-                    <tr>
-                        <td><a href="{% url agora_thread thread.id %}">{{ thread.title }}</a></td>
-                        <td><a href="{% url agora_forum thread.forum.id %}">{{ thread.forum }}</td>
-                        <td>{{ thread.view_count }} view{{ thread.view_count|pluralize }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">Most Active Forums</div>
+                {% if most_active_forums %}
+                    <table class="table table-striped">
+                        {% for forum in most_active_forums %}
+                            <tr>
+                                <td><a href="{% url "agora_forum" forum.pk %}">{{ forum.title }}</a></td>
+                                {% if categories %}<td>{{ forum.category|default:"" }}</td>{% endif %}
+                                <td>{{ forum.post_count }} post{{ forum.post_count|pluralize }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <div class="panel-body">
+                        There are no active forums.
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Most Viewed Forums</div>
+                {% if most_viewed_forums %}
+                    <table class="table table-striped">
+                        {% for forum in most_viewed_forums %}
+                            <tr>
+                                <td><a href="{% url "agora_forum" forum.pk %}">{{ forum.title }}</a></td>
+                                {% if categories %}<td>{{ forum.category|default:"" }}</td>{% endif %}
+                                <td>{{ forum.view_count }} view{{ forum.view_count|pluralize }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <div class="panel-body">
+                        There are no forums.
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Latest Posts</div>
+                {% if latest_posts %}
+                    <table class="table table-striped">
+                        {% for post in latest_posts %}
+                            <tr>
+                                <td><a href="{% url "agora_thread" post.thread.pk %}#post-{{ post.id }}">{{ post.thread.title }}</a></td>
+                                <td>by <a href="{# url "user_page" post.author.pk #}">{{ post.author.username }}</a> {{ post.created|timesince }} ago</td>
+                                <td><a href="{% url "agora_forum" post.thread.forum.pk %}">{{ post.thread.forum }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <div class="panel-body">
+                        There are no posts.
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Latest Threads</div>
+                {% if latest_threads %}
+                    <table class="table table-striped">
+                        {% for thread in latest_threads %}
+                            <tr>
+                                <td><a href="{% url "agora_thread" thread.pk %}">{{ thread.title }}</a>
+                                <td>by <a href="{# url "user_page" thread.author.pk #}">{{ thread.last_post.author.username }}</a> {{ thread.last_modified|timesince }} ago</td>
+                                <td><a href="{% url "agora_forum" thread.forum.pk %}">{{ thread.forum }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <div class="panel-body">
+                        There are no threads.
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Most Active Threads</div>
+                {% if most_active_threads %}
+                    <table class="table table-striped">
+                        {% for thread in most_active_threads %}
+                            <tr>
+                                <td><a href="{% url "agora_thread" thread.pk %}">{{ thread.title }}</a></td>
+                                <td><a href="{% url "agora_forum" thread.forum.pk %}">{{ thread.forum }}</td>
+                                <td>{{ thread.reply_count }} repl{{ thread.reply_count|pluralize:"y,ies" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <div class="panel-body">
+                        There are no active threads.
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Most Viewed Threads</div>
+                {% if most_viewed_threads %}
+                    <table class="table table-striped">
+                        {% for thread in most_viewed_threads %}
+                            <tr>
+                                <td><a href="{% url "agora_thread" thread.pk %}">{{ thread.title }}</a></td>
+                                <td><a href="{% url "agora_forum" thread.forum.pk %}">{{ thread.forum }}</td>
+                                <td>{{ thread.view_count }} view{{ thread.view_count|pluralize }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <div class="panel-body">
+                        There are no viewed threads.
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}
