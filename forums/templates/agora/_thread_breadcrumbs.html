@@ -1,32 +1,25 @@
-<div class="breadcrumb">
-    <a href="{% url agora_forums %}">Forums</a>
+<ol class="breadcrumb">
+    <li><a href="{% url "agora_forums" %}">Forums</a></li>
     {% if thread.forum.category %}
         {% if thread.forum.category.parent %}
-            <span class="divider">&raquo;</span>
-            <a href="{% url agora_category thread.forum.category.parent.id %}">{{ thread.forum.category.parent.title }}</a>
+            <li><a href="{% url "agora_category" thread.forum.category.parent.pk %}">{{ thread.forum.category.parent.title }}</a></li>
         {% endif %}
-        <span class="divider">&raquo;</span>
-        <a href="{% url agora_category thread.forum.category.id %}">{{ thread.forum.category.title }}</a>
+        <li><a href="{% url "agora_category" thread.forum.category.pk %}">{{ thread.forum.category.title }}</a></li>
     {% else %}
         {% if thread.forum.parent %}
             {% if thread.forum.parent.category %}
                 {% if thread.forum.parent.category.parent %}
-                    <span class="divider">&raquo;</span>
-                    <a href="{% url agora_category thread.forum.parent.category.parent.id %}">{{ thread.forum.parent.category.parent.title }}</a>
+                    <li><a href="{% url "agora_category" thread.forum.parent.category.parent.pk %}">{{ thread.forum.parent.category.parent.title }}</a></li>
                 {% endif %}
-                <span class="divider">&raquo;</span>
-                <a href="{% url agora_category thread.forum.parent.category.id %}">{{ thread.forum.parent.category.title }}</a>
+                <li><a href="{% url "agora_category" thread.forum.parent.category.pk %}">{{ thread.forum.parent.category.title }}</a></li>
             {% else %}
                 {% if thread.forum.parent.parent %}
-                    <span class="divider">&raquo;</span>
-                    <a href="{% url agora_forum thread.forum.parent.parent.id %}">{{ thread.forum.parent.parent.title }}</a>
+                    <li><a href="{% url "agora_forum" thread.forum.parent.parent.pk %}">{{ thread.forum.parent.parent.title }}</a></li>
                 {% endif %}
             {% endif %}
-            <span class="divider">&raquo;</span>
-            <a href="{% url agora_forum thread.forum.parent.id %}">{{ thread.forum.parent.title }}</a>
+            <li><a href="{% url "agora_forum" thread.forum.parent.pk %}">{{ thread.forum.parent.title }}</a></li>
         {% endif %}
     {% endif %}
-    <span class="divider">&raquo;</span>
-    <a href="{% url agora_forum thread.forum.id %}">{{ thread.forum.title }}</a>
-    <span class="divider">&raquo;</span>
-</div>
+    <li><a href="{% url "agora_forum" thread.forum.pk %}">{{ thread.forum.title }}</a></li>
+    <li class="active">{{ thread.title }}</li>
+</ol>
