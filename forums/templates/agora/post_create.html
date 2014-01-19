@@ -4,17 +4,32 @@
 
 {% block body %}
     {% include "agora/_forum_breadcrumb.html" %}
-    
-    <h3>Forum Post</h3>
 
-    <form action="{% url agora_post_create forum.pk %}" method="POST" class="form form-horizontal">
-        {% csrf_token %}
-        <fieldset>
-            {{ form|bootstrap }}
-        </fieldset>
-        <div class="form-actions">
-            <a class="btn" href="{% url agora_forum forum.pk %}">Cancel</a>
-            <button class="btn btn-primary" type="submit">Post</button>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="btn btn-default btn-xs pull-right" href="{% url "agora_forum" forum.pk %}">Cancel</a>
+            <h3>
+                {{ forum.title }}
+                {% if forum.closed %}<span class="label">closed</span>{% endif %}
+            </h3>
         </div>
-    </form>
+        <div class="panel-body">
+            <p class="lead">{{ forum.description }}</p>
+            <br />
+            <div class="row">
+                <div class="col-md-5">
+                    <form action="{% url "agora_post_create" forum.pk %}" method="POST" class="form form-horizontal">
+                        <legend>Create Post</legend>
+                        {% csrf_token %}
+                        <fieldset>
+                            {{ form|bootstrap_horizontal:"col-md-3" }}
+                        </fieldset>
+                        <div class="form-actions pull-right">
+                            <button class="btn btn-primary" type="submit">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
