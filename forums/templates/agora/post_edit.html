@@ -1,18 +1,33 @@
 {% extends "agora/base.html" %}
 
+{% load thumbnail %}
 {% load bootstrap %}
 
 {% block body %}
-    <h3>Edit post</h3>
+    {% include "agora/_thread_breadcrumbs.html" with thread=post.thread %}
     
-    <form method="POST" class="form form-horizontal" action="{% url agora_post_edit post.kind post.id %}">
-        {% csrf_token %}
-        <fieldset>
-            {{ form|bootstrap }}
-        </fieldset>
-        <div class="form-actions">
-            <a href="{% url agora_thread post.thread.pk %}" class="btn">Cancel</a>
-            <button type="submit" class="btn btn-primary">Edit</button>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Edit post</h3>
         </div>
-    </form>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="{{ user.profile.avatar|thumbnail_url:'avatar-large' }}" />
+                </div>
+                <div class="col-md-10">
+                    <form method="POST" class="form" action="{% url "agora_post_edit" post.kind post.pk %}">
+                        {% csrf_token %}
+                        <fieldset>
+                            {{ form|bootstrap }}
+                        </fieldset>
+                        <div class="form-actions pull-right">
+                            <a href="{% url "agora_thread" post.thread.pk %}" class="btn btn-default">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
