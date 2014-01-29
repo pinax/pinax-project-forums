@@ -39,7 +39,7 @@
                                 {% if forum.last_reply %}
                                    <td><a href="{% url "agora_thread" forum.last_reply.thread.id %}">{{ forum.last_reply.thread.title }}</a><br />
                                    <small>by <a href="{# url user_page forum.last_reply.author.id #}">{{ forum.last_reply.author.username }}</a></small></td>
-                                {% else %} 
+                                {% else %}
                                     <td></td>
                                 {% endif %}
                                 <td>{{ forum.threads.all.count|intcomma }}</td>
