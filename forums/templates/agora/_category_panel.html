@@ -7,6 +7,7 @@
                     <a href="{% url "agora_category" category.pk %}">
                         {{ category.title }}
                     </a>
+                    <span class="badge pull-right">{% if category.forums.count > 0%}{{ category.forums.count }}{% endif %}</span>
                 </li>
             {% endfor %}
         </ul>
