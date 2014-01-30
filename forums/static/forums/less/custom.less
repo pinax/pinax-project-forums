@@ -17,10 +17,6 @@ body {
         margin-bottom: 0px;
     }
 }
-.panel-body {
-    .lead {
-    }
-}
 .post {
     .post-content {
         min-height: 120px;
@@ -37,11 +33,13 @@ body {
 
 .panel {
     .table {
-        > thead > tr > th:first-child {
-            padding-left: 15px;
+        > thead > tr > th {
+            padding-left: 15px; // same as panel heading
+            padding-right: 15px;
         }
-        > tbody > tr > td:first-child {
-            padding-left: 15px;
+        > tbody > tr > td {
+            padding-left: 15px; // same as panel heading
+            padding-right: 15px;
         }
         > tbody > tr:first-child > td {
             border-top: none;

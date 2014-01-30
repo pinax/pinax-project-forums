@@ -17,7 +17,7 @@
                             <tr>
                                 <td><a href="{% url "agora_forum" forum.pk %}">{{ forum.title }}</a> {% if forum.closed %}<i class="fa fa-lock"></i>{% endif %}</td>
                                 {% if categories %}<td>{{ forum.category|default:"" }}</td>{% endif %}
-                                <td>{{ forum.post_count }} post{{ forum.post_count|pluralize }}</td>
+                                <td class="text-right">{{ forum.post_count }} post{{ forum.post_count|pluralize }}</td>
                             </tr>
                         {% endfor %}
                     </table>
@@ -36,7 +36,7 @@
                             <tr>
                                 <td><a href="{% url "agora_forum" forum.pk %}">{{ forum.title }}</a> {% if forum.closed %}<i class="fa fa-lock"></i>{% endif %}</td>
                                 {% if categories %}<td>{{ forum.category|default:"" }}</td>{% endif %}
-                                <td>{{ forum.view_count }} view{{ forum.view_count|pluralize }}</td>
+                                <td class="text-right">{{ forum.view_count }} view{{ forum.view_count|pluralize }}</td>
                             </tr>
                         {% endfor %}
                     </table>
