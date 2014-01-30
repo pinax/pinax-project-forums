@@ -11,8 +11,8 @@
                 <a class="btn btn-primary btn-sm pull-right" href="{% url "agora_post_create" forum.pk %}"><i class="fa fa-pencil"></i> Make a New Post</a>
             {% endif %}
             <h3>
+            {% if forum.closed %}<span class="label pull-right label-info"><i class="fa fa-lock"></i> closed</span>{% endif %}
                 {{ forum.title }}
-                {% if forum.closed %}<span class="label">closed</span>{% endif %}
             </h3>
         </div>
         <div class="panel-body">
