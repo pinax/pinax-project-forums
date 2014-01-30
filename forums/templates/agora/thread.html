@@ -11,9 +11,9 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <span class="pull-right">
-                <a class="btn btn-info btn-xs" href="?order_type={% ifequal order_type "asc" %}desc{% else %}asc{% endifequal %}">Reverse Reply Order</a>
+                <a class="btn btn-info btn-xs" href="?order_type={% ifequal order_type "asc" %}desc{% else %}asc{% endifequal %}"><i class="fa fa-sort"></i> Reverse Reply Order</a>
                 {% if can_create_reply %}
-                    <a class="btn btn-primary btn-xs" href="{% url "agora_reply_create" thread.pk %}">Post a Reply</a>
+                    <a class="btn btn-primary btn-xs" href="{% url "agora_reply_create" thread.pk %}"><i class="fa fa-reply"></i> Post a Reply</a>
                 {% endif %}
             </span>
             <h3>{{ thread.title }}</h3>
@@ -56,10 +56,10 @@
                                 </span>
                                 <div class="post-actions">
                                     {% if user.is_authenticated %}
-                                        <a class="btn btn-danger btn-xs" href="{# url forum_report post.pk #}">Report</a>
+                                        <a class="btn btn-danger btn-xs" href="{# url forum_report post.pk #}"><i class="fa fa-exclamation-triangle"></i> Report</a>
                                         {% if can_create_reply %}
-                                            <a class="btn btn-success btn-xs" href="{% url "agora_reply_create" thread.pk %}?quote={{ post.pk }}">Quote</a>
-                                            <a class="btn btn-primary btn-xs" href="{% url "agora_reply_create" thread.pk %}">Reply</a>
+                                            <a class="btn btn-success btn-xs" href="{% url "agora_reply_create" thread.pk %}?quote={{ post.pk }}"><i class="fa fa-quote-right"></i> Quote</a>
+                                            <a class="btn btn-primary btn-xs" href="{% url "agora_reply_create" thread.pk %}"><i class="fa fa-reply"></i> Reply</a>
                                         {% endif %}
                                         {% if post|post_editable:request.user %}
                                             <a class="btn btn-info btn-xs" href="{% url "agora_post_edit" post.kind post.pk %}">Edit</a>
@@ -93,7 +93,7 @@
                                 {{ reply_form|bootstrap }}
                             </fieldset>
                             <div class="form-actions pull-right">
-                                <button class="btn btn-primary" type="submit">Reply</button>
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-reply"></i> Reply</button>
                             </div>
                         </form>
                     </div>
