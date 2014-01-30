@@ -1,36 +1,10 @@
 {% extends "agora/base.html" %}
 
-{% load thumbnail %}
-
 {% block body %}
     <div class="row">
         <div class="col-md-3">
             {% include "agora/_category_panel.html" %}
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Most Active Members</div>
-                {% if most_active_members %}
-                    <ul class="list-group media-list">
-                        {% for member_count in most_active_members %}
-                            <li class="list-group-item media">
-                                <img class="pull-left media-object thumbnail img-rounded" src="{{ member_count.user.profile.avatar|thumbnail_url:'avatar' }}" alt="{{ member_count.user.username }}" />
-                                <div class="media-body">
-                                    <h4 class="media-heading">
-                                        <a href="">
-                                            {{ member_count.user.username}}
-                                        </a>
-                                    </h4>
-                                    {{ member_count.count }} Post{{ member_count.count|pluralize }}
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <div class="panel-body">
-                        There are no active members.
-                    </div>
-                {% endif %}
-            </div>
+            {% include "agora/_most_active_member_panel.html" %}
         </div>
         <div class="col-md-9">
             <div class="panel panel-default">
