@@ -1,6 +1,6 @@
 # How to Contribute
 
-There are many ways you can help contribute to pinax-project-account and the
+There are many ways you can help contribute to pinax-project-forums and the
 various apps, themes, and starter projects that it is made up of. Contributing
 code, writing documentation, reporting bugs, as well as reading and providing
 feedback on issues and pull requests, all are valid and necessary ways to
@@ -72,7 +72,7 @@ Django's coding style:
 * Use double quotes not single quotes. Single quotes are allowed in cases
   where a double quote is needed in the string. This makes the code read
   cleaner in those cases.
-* Blank lines are should have no indented whitespace
+* Blank lines should have no indented whitespace
 * Docstrings always use three double quotes on a line of their own, so, for
   example, a single line docstring should take up three lines not one.
 * Imports are grouped specifically and ordered alphabetically. This is shown
