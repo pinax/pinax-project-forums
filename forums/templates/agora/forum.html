@@ -45,34 +45,38 @@
             </table>
         {% endif %}
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Thread Title</th>
-                    <th>Last Post</th>
-                    <th>Replies</th>
-                    <th>Views</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for thread in threads %}
+        {% if threads %}
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="{% url "agora_thread" thread.pk %}"><b>{{ thread.title }}</b></a>
-                            {% if thread.sticky %}<span class="label notice">sticky</span>{% endif %}
-                            {% if thread.closed %}<span class="label">closed</span>{% endif %}
-                            <br />
-                            <small>by <a href="{# url "user_page" thread.author.pk #}">{{ thread.author.username }}</a> {{ thread.created|timesince}} ago </small></td>
-                        <td>{# <a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br /> #}
-                            <small>by <a href="{# url "user_page" thread.last_post.author.pk #}">{{ thread.last_post.author.username }}</a> {{ thread.last_post.created|timesince}} ago</small></td>
-                        <td>{{ thread.reply_count|intcomma }}</td>
-                        <td>{{ thread.view_count|intcomma }}</td>
+                        <th>Thread Title</th>
+                        <th>Last Post</th>
+                        <th>Replies</th>
+                        <th>Views</th>
                     </tr>
-                {% empty %}
-                    <tr><td colspan="4">There are currently no threads.</td></tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for thread in threads %}
+                        <tr>
+                            <td>
+                                <a href="{% url "agora_thread" thread.pk %}"><b>{{ thread.title }}</b></a>
+                                {% if thread.sticky %}<span class="label notice">sticky</span>{% endif %}
+                                {% if thread.closed %}<span class="label">closed</span>{% endif %}
+                                <br />
+                                <small>by <a href="{# url "user_page" thread.author.pk #}">{{ thread.author.username }}</a> {{ thread.created|timesince}} ago </small></td>
+                            <td>{# <a href="{% url agora_thread thread.id %}">{{ thread.title }}</a><br /> #}
+                                <small>by <a href="{# url "user_page" thread.last_post.author.pk #}">{{ thread.last_post.author.username }}</a> {{ thread.last_post.created|timesince}} ago</small></td>
+                            <td>{{ thread.reply_count|intcomma }}</td>
+                            <td>{{ thread.view_count|intcomma }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="panel-body">
+                There are currently no threads.
+            </div>
+        {% endif %}
     </div>
     {% include "pagination/pagination.html" %}
 {% endblock %}
