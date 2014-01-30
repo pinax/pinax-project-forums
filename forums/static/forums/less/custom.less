@@ -34,7 +34,12 @@ body {
 }
 
 .panel {
-    .table > tbody > tr > td {
-        padding-left: 15px;
+    .table {
+        > tbody > tr > td {
+            padding-left: 15px;
+        }
+        > tbody > tr:first-child > td {
+            border-top: none;
+        }
     }
 }
