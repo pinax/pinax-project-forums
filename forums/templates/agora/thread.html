@@ -62,7 +62,7 @@
                                             <a class="btn btn-primary btn-xs" href="{% url "agora_reply_create" thread.pk %}"><i class="fa fa-reply"></i> Reply</a>
                                         {% endif %}
                                         {% if post|post_editable:request.user %}
-                                            <a class="btn btn-info btn-xs" href="{% url "agora_post_edit" post.kind post.pk %}">Edit</a>
+                                            <a class="btn btn-info btn-xs" href="{% url "agora_post_edit" post.kind post.pk %}"><i class="fa fa-edit"></i> Edit</a>
                                         {% endif %}
                                     {% endif %}
                                 </div>
