@@ -12,10 +12,9 @@
                 {{ forum.title }}
                 {% if forum.closed %}<span class="label">closed</span>{% endif %}
             </h3>
+            <p class="lead">{{ forum.description }}</p>
         </div>
         <div class="panel-body">
-            <p class="lead">{{ forum.description }}</p>
-            <br />
             <div class="row">
                 <div class="col-md-5">
                     <form action="{% url "agora_post_create" forum.pk %}" method="POST" class="form form-horizontal">
