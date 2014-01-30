@@ -8,7 +8,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             {% if can_create_thread %}
-                <a class="btn btn-primary btn-xs pull-right" href="{% url "agora_post_create" forum.pk %}">Make a New Post</a>
+                <a class="btn btn-primary btn-sm pull-right" href="{% url "agora_post_create" forum.pk %}"><i class="fa fa-pencil"></i> Make a New Post</a>
             {% endif %}
             <h3>
                 {{ forum.title }}
