@@ -3,7 +3,9 @@
 {% block body %}
     <div class="row">
         <div class="col-md-3">
-            {% include "agora/_category_panel.html" %}
+            {% if categories %}
+                {% include "agora/_category_panel.html" %}
+            {% endif %}
             {% include "agora/_most_active_member_panel.html" %}
         </div>
         <div class="col-md-9">
