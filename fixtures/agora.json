@@ -1,0 +1,78 @@
+[
+{
+    "pk": 1, 
+    "model": "agora.forumcategory", 
+    "fields": {
+        "parent": null, 
+        "title": "Open Source"
+    }
+},
+{
+    "pk": 2, 
+    "model": "agora.forumcategory", 
+    "fields": {
+        "parent": 1, 
+        "title": "Software for the Web"
+    }
+},
+{
+    "pk": 1, 
+    "model": "agora.forum", 
+    "fields": {
+        "category": null, 
+        "view_count": 0, 
+        "description": "Discussions about all facets of creating content for brand awareness", 
+        "parent": null, 
+        "title": "Content Marketing", 
+        "last_thread": null, 
+        "post_count": 0, 
+        "last_modified": "2014-07-19T02:43:48.913Z", 
+        "closed": null
+    }
+},
+{
+    "pk": 2, 
+    "model": "agora.forum", 
+    "fields": {
+        "category": 2, 
+        "view_count": 0, 
+        "description": "Discussions about all the Pinax starter projects", 
+        "parent": null, 
+        "title": "Pinax Starter Projects", 
+        "last_thread": null, 
+        "post_count": 0, 
+        "last_modified": "2014-07-19T02:44:53.491Z", 
+        "closed": null
+    }
+},
+{
+    "pk": 3, 
+    "model": "agora.forum", 
+    "fields": {
+        "category": 1, 
+        "view_count": 0, 
+        "description": "Any an all Python open source worth talking about", 
+        "parent": null, 
+        "title": "Python", 
+        "last_thread": null, 
+        "post_count": 0, 
+        "last_modified": "2014-07-19T02:45:37.346Z", 
+        "closed": null
+    }
+},
+{
+    "pk": 4, 
+    "model": "agora.forum", 
+    "fields": {
+        "category": null, 
+        "view_count": 0, 
+        "description": "Cool Python utilities", 
+        "parent": 3, 
+        "title": "Utilities", 
+        "last_thread": null, 
+        "post_count": 0, 
+        "last_modified": "2014-07-19T02:46:19.402Z", 
+        "closed": null
+    }
+}
+]
