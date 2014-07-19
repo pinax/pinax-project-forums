@@ -5,12 +5,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 
-urlpatterns = patterns("",
+urlpatterns = patterns(
+    "",
     url(r"^admin/", include(admin.site.urls)),
     url(r"^account/", include("account.urls")),
-    url(r"^profiles/", include("forums.profiles.urls")),
+    url(r"^profiles/", include("theforum.profiles.urls")),
 
-    url(r"", include("agora.urls"))
+    url(r"", include("forums.urls"))
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

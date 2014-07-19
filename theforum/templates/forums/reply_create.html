@@ -1,10 +1,10 @@
-{% extends "agora/base.html" %}
+{% extends "forums/base.html" %}
 
 {% load thumbnail %}
 {% load bootstrap %}
 
 {% block body %}
-    {% include "agora/_thread_breadcrumbs.html" with thread=thread %}
+    {% include "forums/_thread_breadcrumbs.html" with thread=thread %}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -16,11 +16,11 @@
                     <img src="{{ user.profile.avatar|thumbnail_url:'avatar-large' }}" />
                 </div>
                 <div class="col-md-10">
-                    <form method="POST" class="form" action="{% url "agora_reply_create" thread.pk %}">
+                    <form method="POST" class="form" action="{% url "forums_reply_create" thread.pk %}">
                         {% csrf_token %}
                         {{ form|bootstrap }}
                         <div class="form-actions pull-right">
-                            <a href="{% url "agora_thread" thread.pk %}" class="btn btn-default">
+                            <a href="{% url "forums_thread" thread.pk %}" class="btn btn-default">
                                 Cancel
                             </a>
                             <button type="submit" class="btn btn-primary">

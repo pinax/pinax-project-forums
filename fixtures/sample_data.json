@@ -1,7 +1,7 @@
 [
 {
     "pk": 1, 
-    "model": "agora.forumcategory", 
+    "model": "forums.forumcategory", 
     "fields": {
         "parent": null, 
         "title": "Open Source"
@@ -9,7 +9,7 @@
 },
 {
     "pk": 2, 
-    "model": "agora.forumcategory", 
+    "model": "forums.forumcategory", 
     "fields": {
         "parent": 1, 
         "title": "Software for the Web"
@@ -17,7 +17,7 @@
 },
 {
     "pk": 1, 
-    "model": "agora.forum", 
+    "model": "forums.forum", 
     "fields": {
         "category": null, 
         "view_count": 0, 
@@ -32,7 +32,7 @@
 },
 {
     "pk": 2, 
-    "model": "agora.forum", 
+    "model": "forums.forum", 
     "fields": {
         "category": 2, 
         "view_count": 0, 
@@ -47,7 +47,7 @@
 },
 {
     "pk": 3, 
-    "model": "agora.forum", 
+    "model": "forums.forum", 
     "fields": {
         "category": 1, 
         "view_count": 0, 
@@ -62,7 +62,7 @@
 },
 {
     "pk": 4, 
-    "model": "agora.forum", 
+    "model": "forums.forum", 
     "fields": {
         "category": null, 
         "view_count": 0, 

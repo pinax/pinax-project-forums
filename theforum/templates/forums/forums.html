@@ -1,12 +1,12 @@
-{% extends "agora/base.html" %}
+{% extends "forums/base.html" %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-3">
             {% if categories %}
-                {% include "agora/_category_panel.html" %}
+                {% include "forums/_category_panel.html" %}
             {% endif %}
-            {% include "agora/_most_active_member_panel.html" %}
+            {% include "forums/_most_active_member_panel.html" %}
         </div>
         <div class="col-md-9">
             <div class="panel panel-default">
@@ -15,7 +15,7 @@
                     <table class="table table-striped">
                         {% for forum in most_active_forums %}
                             <tr>
-                                <td><a href="{% url "agora_forum" forum.pk %}">{{ forum.title }}</a> {% if forum.closed %}<i class="fa fa-lock"></i>{% endif %}</td>
+                                <td><a href="{% url "forums_forum" forum.pk %}">{{ forum.title }}</a> {% if forum.closed %}<i class="fa fa-lock"></i>{% endif %}</td>
                                 {% if categories %}<td>{{ forum.category|default:"" }}</td>{% endif %}
                                 <td class="text-right">{{ forum.post_count }} post{{ forum.post_count|pluralize }}</td>
                             </tr>
@@ -34,7 +34,7 @@
                     <table class="table table-striped">
                         {% for forum in most_viewed_forums %}
                             <tr>
-                                <td><a href="{% url "agora_forum" forum.pk %}">{{ forum.title }}</a> {% if forum.closed %}<i class="fa fa-lock"></i>{% endif %}</td>
+                                <td><a href="{% url "forums_forum" forum.pk %}">{{ forum.title }}</a> {% if forum.closed %}<i class="fa fa-lock"></i>{% endif %}</td>
                                 {% if categories %}<td>{{ forum.category|default:"" }}</td>{% endif %}
                                 <td class="text-right">{{ forum.view_count }} view{{ forum.view_count|pluralize }}</td>
                             </tr>
@@ -53,9 +53,9 @@
                     <table class="table table-striped">
                         {% for post in latest_posts %}
                             <tr>
-                                <td><a href="{% url "agora_thread" post.thread.pk %}#post-{{ post.id }}">{{ post.thread.title }}</a></td>
+                                <td><a href="{% url "forums_thread" post.thread.pk %}#post-{{ post.id }}">{{ post.thread.title }}</a></td>
                                 <td>by <a href="{# url "user_page" post.author.pk #}">{{ post.author.username }}</a> {{ post.created|timesince }} ago</td>
-                                <td><a href="{% url "agora_forum" post.thread.forum.pk %}">{{ post.thread.forum }}</a></td>
+                                <td><a href="{% url "forums_forum" post.thread.forum.pk %}">{{ post.thread.forum }}</a></td>
                             </tr>
                         {% endfor %}
                     </table>
@@ -72,9 +72,9 @@
                     <table class="table table-striped">
                         {% for thread in latest_threads %}
                             <tr>
-                                <td><a href="{% url "agora_thread" thread.pk %}">{{ thread.title }}</a>
+                                <td><a href="{% url "forums_thread" thread.pk %}">{{ thread.title }}</a>
                                 <td>by <a href="{# url "user_page" thread.author.pk #}">{{ thread.last_post.author.username }}</a> {{ thread.last_modified|timesince }} ago</td>
-                                <td><a href="{% url "agora_forum" thread.forum.pk %}">{{ thread.forum }}</td>
+                                <td><a href="{% url "forums_forum" thread.forum.pk %}">{{ thread.forum }}</td>
                             </tr>
                         {% endfor %}
                     </table>
@@ -91,8 +91,8 @@
                     <table class="table table-striped">
                         {% for thread in most_active_threads %}
                             <tr>
-                                <td><a href="{% url "agora_thread" thread.pk %}">{{ thread.title }}</a></td>
-                                <td><a href="{% url "agora_forum" thread.forum.pk %}">{{ thread.forum }}</td>
+                                <td><a href="{% url "forums_thread" thread.pk %}">{{ thread.title }}</a></td>
+                                <td><a href="{% url "forums_forum" thread.forum.pk %}">{{ thread.forum }}</td>
                                 <td>{{ thread.reply_count }} repl{{ thread.reply_count|pluralize:"y,ies" }}</td>
                             </tr>
                         {% endfor %}
@@ -110,8 +110,8 @@
                     <table class="table table-striped">
                         {% for thread in most_viewed_threads %}
                             <tr>
-                                <td><a href="{% url "agora_thread" thread.pk %}">{{ thread.title }}</a></td>
-                                <td><a href="{% url "agora_forum" thread.forum.pk %}">{{ thread.forum }}</td>
+                                <td><a href="{% url "forums_thread" thread.pk %}">{{ thread.title }}</a></td>
+                                <td><a href="{% url "forums_forum" thread.forum.pk %}">{{ thread.forum }}</td>
                                 <td>{{ thread.view_count }} view{{ thread.view_count|pluralize }}</td>
                             </tr>
                         {% endfor %}

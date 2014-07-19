@@ -2,7 +2,7 @@ Pinax Forums
 ============
 
 This is an open-source forums project in progress, built on
-[agora](https://github.com/eldarion/agora)
+[pinax-forums](https://github.com/pinax/pinax-forums)
 and a number of other apps in the Pinax ecosystem.
 
 Our goals with this project are to both provide scaffolding for the further

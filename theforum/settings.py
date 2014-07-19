@@ -108,10 +108,10 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.messages.middleware.MessageMiddleware",
 ]
 
-ROOT_URLCONF = "forums.urls"
+ROOT_URLCONF = "theforum.urls"
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = "forums.wsgi.application"
+WSGI_APPLICATION = "theforum.wsgi.application"
 
 TEMPLATE_DIRS = [
     os.path.join(PACKAGE_ROOT, "templates"),
@@ -136,11 +136,11 @@ INSTALLED_APPS = [
     "metron",
     "eventlog",
     "easy_thumbnails",
-    "agora",
+    "forums",
 
     # project
-    "forums",
-    "forums.profiles",
+    "theforum",
+    "theforum.profiles",
 ]
 
 AUTH_PROFILE_MODULE = "profiles.Profile"
@@ -192,13 +192,13 @@ ACCOUNT_USE_OPENID = False
 ACCOUNT_REQUIRED_EMAIL = False
 ACCOUNT_EMAIL_VERIFICATION = False
 ACCOUNT_EMAIL_AUTHENTICATION = False
-ACCOUNT_LOGIN_REDIRECT_URL = "agora_forums"
-ACCOUNT_LOGOUT_REDIRECT_URL = "agora_forums"
+ACCOUNT_LOGIN_REDIRECT_URL = "forums_forums"
+ACCOUNT_LOGOUT_REDIRECT_URL = "forums_forums"
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 ACCOUNT_USE_AUTH_AUTHENTICATE = True
 
 
 AUTHENTICATION_BACKENDS = [
     "account.auth_backends.UsernameAuthenticationBackend",
-    "forums.auth_backends.PermissionBackend",
+    "theforum.auth_backends.PermissionBackend",
 ]

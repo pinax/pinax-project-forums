@@ -6,4 +6,4 @@ eventlog==0.8.0
 django-jsonfield==0.9.13
 Pillow==2.5.1
 easy-thumbnails==2.0.1
-git+https://github.com/eldarion/agora.git#egg=agora
+pinax-forums==0.9

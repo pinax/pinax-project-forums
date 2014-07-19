@@ -1,24 +1,24 @@
 {% load humanize %}
 <ol class="breadcrumb">
-    <li><a href="{% url "agora_forums" %}">Forums</a></li>
+    <li><a href="{% url "forums_forums" %}">Forums</a></li>
     {% if forum.category %}
         {% if forum.category.parent %}
-            <li><a href="{% url "agora_category" forum.category.parent.pk %}">{{ forum.category.parent.title }}</a></li>
+            <li><a href="{% url "forums_category" forum.category.parent.pk %}">{{ forum.category.parent.title }}</a></li>
         {% endif %}
-        <li><a href="{% url "agora_category" forum.category.pk %}">{{ forum.category.title }}</a></li>
+        <li><a href="{% url "forums_category" forum.category.pk %}">{{ forum.category.title }}</a></li>
     {% else %}
         {% if forum.parent %}
             {% if forum.parent.category %}
                 {% if forum.parent.category.parent %}
-                    <li><a href="{% url "agora_category" forum.parent.category.parent.pk %}">{{ forum.parent.category.parent.title }}</a></li>
+                    <li><a href="{% url "forums_category" forum.parent.category.parent.pk %}">{{ forum.parent.category.parent.title }}</a></li>
                 {% endif %}
-                <li><a href="{% url "agora_category" forum.parent.category.pk %}">{{ forum.parent.category.title }}</a></li>
+                <li><a href="{% url "forums_category" forum.parent.category.pk %}">{{ forum.parent.category.title }}</a></li>
             {% else %}
                 {% if forum.parent.parent %}
-                    <li><a href="{% url "agora_forum" forum.parent.parent.pk %}">{{ forum.parent.parent.title }}</a></li>
+                    <li><a href="{% url "forums_forum" forum.parent.parent.pk %}">{{ forum.parent.parent.title }}</a></li>
                 {% endif %}
             {% endif %}
-            <li><a href="{% url "agora_forum" forum.parent.pk %}">{{ forum.parent.title }}</a></li>
+            <li><a href="{% url "forums_forum" forum.parent.pk %}">{{ forum.parent.title }}</a></li>
         {% endif %}
     {% endif %}
     <li class="active">{{ forum.title }}</li>

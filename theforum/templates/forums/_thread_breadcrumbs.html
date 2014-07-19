@@ -1,0 +1,25 @@
+<ol class="breadcrumb">
+    <li><a href="{% url "forums_forums" %}">Forums</a></li>
+    {% if thread.forum.category %}
+        {% if thread.forum.category.parent %}
+            <li><a href="{% url "forums_category" thread.forum.category.parent.pk %}">{{ thread.forum.category.parent.title }}</a></li>
+        {% endif %}
+        <li><a href="{% url "forums_category" thread.forum.category.pk %}">{{ thread.forum.category.title }}</a></li>
+    {% else %}
+        {% if thread.forum.parent %}
+            {% if thread.forum.parent.category %}
+                {% if thread.forum.parent.category.parent %}
+                    <li><a href="{% url "forums_category" thread.forum.parent.category.parent.pk %}">{{ thread.forum.parent.category.parent.title }}</a></li>
+                {% endif %}
+                <li><a href="{% url "forums_category" thread.forum.parent.category.pk %}">{{ thread.forum.parent.category.title }}</a></li>
+            {% else %}
+                {% if thread.forum.parent.parent %}
+                    <li><a href="{% url "forums_forum" thread.forum.parent.parent.pk %}">{{ thread.forum.parent.parent.title }}</a></li>
+                {% endif %}
+            {% endif %}
+            <li><a href="{% url "forums_forum" thread.forum.parent.pk %}">{{ thread.forum.parent.title }}</a></li>
+        {% endif %}
+    {% endif %}
+    <li><a href="{% url "forums_forum" thread.forum.pk %}">{{ thread.forum.title }}</a></li>
+    <li class="active">{{ thread.title }}</li>
+</ol>
