@@ -17,7 +17,7 @@ import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ project_name }}.settings")
 
-import {{ project_name }}.startup as startup
+import project_name.startup as startup
 startup.run()
 
 # This application object is used by any WSGI server configured to use this
