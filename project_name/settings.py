@@ -108,10 +108,10 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.messages.middleware.MessageMiddleware",
 ]
 
-ROOT_URLCONF = "theforum.urls"
+ROOT_URLCONF = "{{ project_name }}.urls"
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = "theforum.wsgi.application"
+WSGI_APPLICATION = "{{ project_name }}.wsgi.application"
 
 TEMPLATE_DIRS = [
     os.path.join(PACKAGE_ROOT, "templates"),
@@ -139,8 +139,8 @@ INSTALLED_APPS = [
     "forums",
 
     # project
-    "theforum",
-    "theforum.profiles",
+    "{{ project_name }}",
+    "{{ project_name }}.profiles",
 ]
 
 AUTH_PROFILE_MODULE = "profiles.Profile"
@@ -200,5 +200,5 @@ ACCOUNT_USE_AUTH_AUTHENTICATE = True
 
 AUTHENTICATION_BACKENDS = [
     "account.auth_backends.UsernameAuthenticationBackend",
-    "theforum.auth_backends.PermissionBackend",
+    "{{ project_name }}.auth_backends.PermissionBackend",
 ]

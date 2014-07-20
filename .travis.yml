@@ -4,4 +4,4 @@ python:
 install:
   - pip install flake8
 script:
-  - flake8 --max-line-length=125 --max-complexity=10 --statistics --benchmark theforum
+  - flake8 --max-line-length=125 --max-complexity=10 --statistics --benchmark {{ project_name }}
