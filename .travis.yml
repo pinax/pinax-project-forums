@@ -7,4 +7,4 @@ before_script:
   - django-admin.py startproject --template=. testsite
 script:
   - flake8 --max-line-length=125 --max-complexity=10 --statistics --benchmark testsite/testsite
-  - cd testsite && python manage.py syncdb --noinput && python manage.py test
+  - cd testsite && pip install -r requirements.txt && python manage.py syncdb --noinput && python manage.py test
