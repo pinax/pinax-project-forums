@@ -1,5 +1,6 @@
 Pinax Forums
 ============
+[![Join us on Slack](http://slack.pinaxproject.com/badge.svg)](http://slack.pinaxproject.com/)
 
 This is an open-source forums project in progress, built on
 [pinax-forums](https://github.com/pinax/pinax-forums)
